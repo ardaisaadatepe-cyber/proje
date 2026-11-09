@@ -1,0 +1,747 @@
+<!DOCTYPE html>
+<html lang="tr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>YKS Geri Sayım</title>
+
+    <style>
+        body {
+            background: #101827;
+            color: white;
+            font-family: Arial, sans-serif;
+            text-align: center;
+            padding: 60px 15px;
+        }
+
+        h1 {
+            color: #a78bfa;
+            font-size: 42px;
+            padding: 25px;
+            margin-bottom: 15px;
+        }
+
+        .sayac {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            flex-wrap: wrap;
+            margin-top: 80px;
+        }
+
+        .kutu {
+            background: #263449;
+            padding: 28px;
+            border-radius: 36px;
+            min-width: 90px;
+        }
+
+        .sayi {
+            font-size: 36px;
+            font-weight: bold;
+        }
+
+        .aciklama {
+            color: #b8c3d4;
+            margin-top: 8px;
+        }
+
+        table {
+            background-color: rgb(24, 44, 176);
+            border-collapse: collapse;
+            border: 2px solid rgb(239, 222, 31);
+
+        }
+
+        th,
+        td {
+            border: 1px solid aquamarine;
+        }
+
+        b {
+            border: 2px solid;
+            border-block-start-width: 25px;
+        }
+
+        .tabloalani {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 25px;
+            margin: 30px;
+        }
+
+        /* NET HESAPLAMA ALANI */
+
+        #net-hesaplama {
+            background: #1b2940;
+            max-width: 750px;
+            margin: 50px auto;
+            padding: 30px;
+            border-radius: 18px;
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.25);
+            text-align: left;
+        }
+
+        #net-hesaplama h2 {
+            color: #a78bfa;
+            text-align: center;
+            font-size: 28px;
+            margin-bottom: 25px;
+        }
+
+        /* SINAV SEÇİMİ */
+
+        #sinav {
+            width: 100%;
+            padding: 12px;
+            margin: 10px 0 25px;
+            background: #263449;
+            color: white;
+            border: 1px solid #64748b;
+            border-radius: 8px;
+            font-size: 16px;
+        }
+
+        #ykstablo {
+            padding: 10px;
+
+        }
+
+        /* DERS KARTI */
+
+        .ders {
+            background: #263449;
+            padding: 20px;
+            margin-bottom: 20px;
+            border-radius: 12px;
+        }
+
+        .ders h3 {
+            color: #c4b5fd;
+            margin-top: 0;
+            margin-bottom: 15px;
+        }
+
+        /* GİRİŞ ALANLARI */
+
+        .ders label {
+            display: block;
+            color: #cbd5e1;
+            margin: 10px 0 6px;
+        }
+
+        .ders input {
+            width: 100%;
+            box-sizing: border-box;
+            padding: 12px;
+            background: #101827;
+            color: white;
+            border: 1px solid #475569;
+            border-radius: 8px;
+            outline: none;
+            font-size: 16px;
+        }
+
+
+
+        .ders input:focus,
+        #sinav:focus {
+            border-color: #a78bfa;
+        }
+
+        /* HESAPLAMA BUTONU */
+
+        #net-hesaplama button {
+            width: 100%;
+            padding: 14px;
+            background: #8b5cf6;
+            color: white;
+            border: none;
+            border-radius: 10px;
+            font-size: 16px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+        #net-hesaplama button:hover {
+            background: #7c3aed;
+            transform: translateY(-2px);
+        }
+
+
+
+        /* SONUÇ */
+
+        #sonuc {
+            background: #101827;
+            color: #a78bfa;
+            padding: 18px;
+            margin-top: 20px;
+            border-radius: 10px;
+            text-align: center;
+            font-size: 20px;
+            font-weight: bold;
+        }
+
+        /* MOBİL UYUMLULUK */
+
+        @media (max-width: 600px) {
+
+            #net-hesaplama {
+                margin: 25px 10px;
+                padding: 20px;
+            }
+
+            #net-hesaplama h2 {
+                font-size: 23px;
+            }
+
+            .ders {
+                padding: 15px;
+            }
+
+
+        }
+
+        /* AYT DERS GRUPLARI */
+
+        .ayt-grup {
+            background: #172438;
+            padding: 20px;
+            margin-bottom: 25px;
+            border-radius: 15px;
+            border: 1px solid #475569;
+        }
+
+        .grup-baslik {
+            color: #a78bfa;
+            text-align: center;
+            font-size: 21px;
+            margin-bottom: 20px;
+        }
+
+        .grup-sonuc {
+            background: #101827;
+            color: #a78bfa;
+            padding: 15px;
+            border-radius: 8px;
+            text-align: center;
+            font-weight: bold;
+        }
+    </style>
+</head>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<body>
+    <aside>
+
+
+        <h1>YKS'ye Ne Kadar Kaldı?</h1>
+        <p>HEDEFE ULAŞMAK İÇİN ASLA VAZGEÇME!</p>
+        <nav>
+            <a href="#"></a>
+            <a href="#"></a>
+            <a href="#"></a>
+        </nav>
+
+        <div class="sayac">
+            <div class="kutu">
+                <div class="sayi" id="gun">0</div>
+                <div class="aciklama">Gün</div>
+            </div>
+
+            <div class="kutu">
+                <div class="sayi" id="saat">0</div>
+                <div class="aciklama">Saat</div>
+            </div>
+
+            <div class="kutu">
+                <div class="sayi" id="dakika">0</div>
+                <div class="aciklama">Dakika</div>
+            </div>
+
+            <div class="kutu">
+                <div class="sayi" id="saniye">0</div>
+                <div class="aciklama">Saniye</div>
+            </div>
+        </div>
+
+        <center>
+            <h1 id="ykstablo">SINAV BİLGİLERİ</h1>
+        </center>
+        <div class="tabloalani">
+            <table>
+                <th colspan="2">TYT</th>
+                <tr>
+                    <th>SORU SAYISI</th>
+                    <th>120</th>
+                </tr>
+                <tr>
+                    <td>SINAV SÜRESİ:</td>
+                    <td>165DK</td>
+                </tr>
+                <tr>
+                    <td>TARİH</td>
+                    <td>20 Haziran 2027</td>
+                </tr>
+
+
+
+            </table class="b">
+            <table>
+                <th colspan="2">AYT</th>
+                <tr>
+                    <th>SORU SAYISI</th>
+                    <th>120</th>
+                </tr>
+                <tr>
+                    <td>SINAV SÜRESİ:</td>
+                    <td>165DK</td>
+                </tr>
+                <tr>
+                    <td>TARİH</td>
+                    <td>20 Haziran 2027</td>
+                </tr>
+                <table>
+                    <th colspan="2">YDS</th>
+                    <tr>
+                        <th>SORU SAYISI</th>
+                        <th>80</th>
+                    </tr>
+                    <tr>
+                        <td>SINAV SÜRESİ</td>
+                        <td>180DK</td>
+                    </tr>
+                    <tr>
+                        <td>TARİH</td>
+                        <td>20 Haziran 2027</td>
+                    </tr>
+                </table>
+
+
+
+            </table>
+        </div>
+
+
+
+
+        <section id="net-hesaplama">
+
+            <h2>Net Hesaplama</h2>
+
+            <label for="sinav">Sınav Türü:</label>
+
+            <select id="sinav" onchange="sinavDegistir()">
+                <option value="TYT">TYT</option>
+                <option value="AYT">AYT</option>
+            </select>
+
+
+
+
+
+            <div id="tyt-dersler">
+                <div class="ders" data-soru="40">
+
+                    <h3>Türkçe</h3>
+                    <input type="number" class="dogru" placeholder="Doğru">
+                    <input type="number" class="yanlis" placeholder="Yanlış">
+                    <p class="ders-sonuc">Türkçe Neti: 0.00</p>
+                </div>
+
+
+                <div class="ders" data-soru="20">
+                    <h3>Sosyal Bilimler</h3>
+                    <input type="number" class="dogru" placeholder="Doğru">
+                    <input type="number" class="yanlis" placeholder="Yanlış">
+                    <p class="ders-sonuc">Sosyal Bilimler Neti: 0.00</p>
+                </div>
+
+                <div class="ders" data-soru="40">
+                    <h3>Matematik</h3>
+                    <input type="number" class="dogru" placeholder="Doğru">
+                    <input type="number" class="yanlis" placeholder="Yanlış">
+                    <p class="ders-sonuc">Matematik Neti: 0.00</p>
+                </div>
+
+                <div class="ders" data-soru="20">
+                    <h3>Fen Bilimleri</h3>
+                    <input type="number" class="dogru" placeholder="Doğru">
+                    <input type="number" class="yanlis" placeholder="Yanlış">
+                    <p class="ders-sonuc">Fen Neti: 0.00</p>
+                </div>
+            </div>
+
+            <div id="ayt-dersler" hidden>
+
+                <!-- 1. MATEMATİK TESTİ -->
+                <div class="ayt-grup">
+
+                    <h3 class="grup-baslik">Matematik Testi</h3>
+
+                    <div class="ders" data-soru="40">
+                        <h3>Matematik</h3>
+                        <input type="number" class="dogru" placeholder="Doğru" min="0">
+                        <input type="number" class="yanlis" placeholder="Yanlış" min="0">
+                        <p class="ders-sonuc">Matematik Neti: 0.00</p>
+                    </div>
+
+                    <p class="grup-sonuc">Matematik Testi Neti: 0.00</p>
+
+                </div>
+
+
+                <!-- 2. FEN BİLİMLERİ -->
+                <div class="ayt-grup">
+
+                    <h3 class="grup-baslik">Fen Bilimleri Testi</h3>
+
+                    <div class="ders" data-soru="14">
+                        <h3>Fizik</h3>
+                        <input type="number" class="dogru" placeholder="Doğru" min="0">
+                        <input type="number" class="yanlis" placeholder="Yanlış" min="0">
+                        <p class="ders-sonuc">Fizik Neti: 0.00</p>
+                    </div>
+
+                    <div class="ders" data-soru="13">
+                        <h3>Kimya</h3>
+                        <input type="number" class="dogru" placeholder="Doğru" min="0">
+                        <input type="number" class="yanlis" placeholder="Yanlış" min="0">
+                        <p class="ders-sonuc">Kimya Neti: 0.00</p>
+                    </div>
+
+                    <div class="ders" data-soru="13">
+                        <h3>Biyoloji</h3>
+                        <input type="number" class="dogru" placeholder="Doğru" min="0">
+                        <input type="number" class="yanlis" placeholder="Yanlış" min="0">
+                        <p class="ders-sonuc">Biyoloji Neti: 0.00</p>
+                    </div>
+
+                    <p class="grup-sonuc">Fen Bilimleri Neti: 0.00</p>
+
+                </div>
+
+
+                <!-- 3. EDEBİYAT VE SOSYAL BİLİMLER-1 -->
+                <div class="ayt-grup">
+
+                    <h3 class="grup-baslik">
+                        Türk Dili ve Edebiyatı - Sosyal Bilimler-1
+                    </h3>
+
+                    <div class="ders" data-soru="24">
+                        <h3>Türk Dili ve Edebiyatı</h3>
+                        <input type="number" class="dogru" placeholder="Doğru" min="0">
+                        <input type="number" class="yanlis" placeholder="Yanlış" min="0">
+                        <p class="ders-sonuc">Edebiyat Neti: 0.00</p>
+                    </div>
+
+                    <div class="ders" data-soru="10">
+                        <h3>Tarih-1</h3>
+                        <input type="number" class="dogru" placeholder="Doğru" min="0">
+                        <input type="number" class="yanlis" placeholder="Yanlış" min="0">
+                        <p class="ders-sonuc">Tarih-1 Neti: 0.00</p>
+                    </div>
+
+                    <div class="ders" data-soru="6">
+                        <h3>Coğrafya-1</h3>
+                        <input type="number" class="dogru" placeholder="Doğru" min="0">
+                        <input type="number" class="yanlis" placeholder="Yanlış" min="0">
+                        <p class="ders-sonuc">Coğrafya-1 Neti: 0.00</p>
+                    </div>
+
+                    <p class="grup-sonuc">Edebiyat-Sosyal 1 Neti: 0.00</p>
+
+                </div>
+
+
+                <!-- 4. SOSYAL BİLİMLER-2 -->
+                <div class="ayt-grup">
+
+                    <h3 class="grup-baslik">Sosyal Bilimler-2</h3>
+
+                    <div class="ders" data-soru="11">
+                        <h3>Tarih-2</h3>
+                        <input type="number" class="dogru" placeholder="Doğru" min="0">
+                        <input type="number" class="yanlis" placeholder="Yanlış" min="0">
+                        <p class="ders-sonuc">Tarih-2 Neti: 0.00</p>
+                    </div>
+
+                    <div class="ders" data-soru="11">
+                        <h3>Coğrafya-2</h3>
+                        <input type="number" class="dogru" placeholder="Doğru" min="0">
+                        <input type="number" class="yanlis" placeholder="Yanlış" min="0">
+                        <p class="ders-sonuc">Coğrafya-2 Neti: 0.00</p>
+                    </div>
+
+                    <div class="ders" data-soru="12">
+                        <h3>Felsefe Grubu</h3>
+                        <input type="number" class="dogru" placeholder="Doğru" min="0">
+                        <input type="number" class="yanlis" placeholder="Yanlış" min="0">
+                        <p class="ders-sonuc">Felsefe Neti: 0.00</p>
+                    </div>
+
+                    <div class="ders" data-soru="6">
+                        <h3>Din Kültürü / Alternatif Felsefe</h3>
+                        <input type="number" class="dogru" placeholder="Doğru" min="0">
+                        <input type="number" class="yanlis" placeholder="Yanlış" min="0">
+                        <p class="ders-sonuc">Din / Alternatif Felsefe Neti: 0.00</p>
+                    </div>
+
+                    <p class="grup-sonuc">Sosyal Bilimler-2 Neti: 0.00</p>
+
+                </div>
+
+            </div>
+
+            <button onclick="netHesapla()">
+                Net Hesapla
+            </button>
+
+            <p id="sonuc">Toplam Netin: 0.00</p>
+            <button type="button" onclick="sifirla()">Temizle</button>
+
+
+        </section>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        <script>
+            // Örnek tarih, resmi sınav tarihine göre güncelle.
+            const hedefTarih = new Date("2027-06-20T10:15:00");
+
+            function sayaciGuncelle() {
+                const simdi = new Date();
+                const fark = hedefTarih - simdi;
+
+                if (fark <= 0) {
+                    document.body.innerHTML = "<h1>Başarılar!</h1>";
+                    return;
+                }
+
+                const gun = Math.floor(fark / (1000 * 60 * 60 * 24));
+                const saat = Math.floor((fark / (1000 * 60 * 60)) % 24);
+                const dakika = Math.floor((fark / (1000 * 60)) % 60);
+                const saniye = Math.floor((fark / 1000) % 60);
+
+                document.getElementById("gun").textContent = gun;
+                document.getElementById("saat").textContent = saat;
+                document.getElementById("dakika").textContent = dakika;
+                document.getElementById("saniye").textContent = saniye;
+            }
+
+            sayaciGuncelle();
+            setInterval(sayaciGuncelle, 1000);
+            function sifirla() {
+
+                const secilen = document.getElementById("sinav").value;
+
+                const alan = document.getElementById(
+                    secilen.toLowerCase() + "-dersler"
+                );
+
+                const dersler = alan.querySelectorAll(".ders");
+
+                dersler.forEach(ders => {
+
+                    ders.querySelector(".dogru").value = "";
+                    ders.querySelector(".yanlis").value = "";
+
+                    const dersAdi = ders.querySelector("h3").textContent;
+
+                    ders.querySelector(".ders-sonuc").textContent =
+                        dersAdi + " Neti: 0.00";
+
+                });
+
+                // AYT grup sonuçlarını sıfırla
+
+                const gruplar = alan.querySelectorAll(".ayt-grup");
+
+                gruplar.forEach(grup => {
+
+                    const grupAdi = grup.querySelector(".grup-baslik").textContent;
+
+                    grup.querySelector(".grup-sonuc").textContent =
+                        grupAdi + " Neti: 0.00";
+
+                });
+
+                document.getElementById("sonuc").textContent =
+                    "Toplam " + secilen + " Net: 0.00";
+
+            }
+            function netHesapla() {
+
+                let toplamNet = 0;
+
+                const secilen = document.getElementById("sinav").value;
+
+                const alan = document.getElementById(
+                    secilen.toLowerCase() + "-dersler"
+                );
+
+                const dersler = alan.querySelectorAll(".ders");
+
+                dersler.forEach(ders => {
+
+                    const dogru = Number(ders.querySelector(".dogru").value) || 0;
+                    const yanlis = Number(ders.querySelector(".yanlis").value) || 0;
+
+                    const net = dogru - (yanlis / 4);
+
+                    const dersAdi = ders.querySelector("h3").textContent;
+
+                    ders.querySelector(".ders-sonuc").textContent =
+                        dersAdi + " Neti: " + net.toFixed(2);
+
+                    toplamNet += net;
+
+                });
+
+                // AYT grup netlerini hesapla
+
+                if (secilen === "AYT") {
+
+                    const gruplar = alan.querySelectorAll(".ayt-grup");
+
+                    gruplar.forEach(grup => {
+
+                        let grupNeti = 0;
+
+                        const grupDersleri = grup.querySelectorAll(".ders");
+
+                        grupDersleri.forEach(ders => {
+
+                            const dogru = Number(ders.querySelector(".dogru").value) || 0;
+                            const yanlis = Number(ders.querySelector(".yanlis").value) || 0;
+
+                            grupNeti += dogru - (yanlis / 4);
+
+                        });
+
+                        grup.querySelector(".grup-sonuc").textContent =
+                            grup.querySelector(".grup-baslik").textContent +
+                            " Neti: " + grupNeti.toFixed(2);
+
+                    });
+
+                }
+
+                document.getElementById("sonuc").textContent =
+                    "Toplam " + secilen + " Net: " + toplamNet.toFixed(2);
+
+            }
+
+            function sinavDegistir() {
+
+                const secilen = document.getElementById("sinav").value;
+
+                document.getElementById("tyt-dersler").hidden =
+                    secilen !== "TYT";
+
+                document.getElementById("ayt-dersler").hidden =
+                    secilen !== "AYT";
+
+                document.getElementById("sonuc").textContent =
+                    "Toplam Net: 0.00";
+            }
+
+
+            const dersler = document.querySelectorAll(".ders");
+
+            dersler.forEach(ders => {
+
+                const toplamSoru = Number(ders.dataset.soru);
+
+                const dogru = ders.querySelector(".dogru");
+                const yanlis = ders.querySelector(".yanlis");
+
+                function kontrolEt() {
+
+                    let d = Number(dogru.value) || 0;
+                    let y = Number(yanlis.value) || 0;
+
+                    if (d > toplamSoru) {
+                        d = toplamSoru;
+                        dogru.value = d;
+                    }
+
+                    if (y > toplamSoru - d) {
+                        y = toplamSoru - d;
+                        yanlis.value = y;
+                    }
+
+                    dogru.max = toplamSoru - y;
+                    yanlis.max = toplamSoru - d;
+                }
+
+                dogru.addEventListener("input", kontrolEt);
+                yanlis.addEventListener("input", kontrolEt);
+
+            });
+
+
+
+        </script>
+
+    </aside>
+</body>
+
+</html>
