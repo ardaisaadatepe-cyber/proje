@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>YKS Geri Sayım</title>
 
+
     <style>
         body {
             background: #101827;
@@ -30,6 +31,10 @@
             margin-top: 80px;
         }
 
+        .sayac-gun-dagilimi {
+            margin-top: 25px;
+        }
+
         .kutu {
             background: #263449;
             padding: 28px;
@@ -51,6 +56,7 @@
             background-color: rgb(24, 44, 176);
             border-collapse: collapse;
             border: 2px solid rgb(239, 222, 31);
+            color: rgb(51, 198, 90);
 
         }
 
@@ -231,6 +237,258 @@
             text-align: center;
             font-weight: bold;
         }
+
+        /* ÇALIŞMA TAKİP PANELİ */
+
+        #calisma-panel {
+            background: #1b2940;
+            max-width: 750px;
+            margin: 50px auto;
+            padding: 30px;
+            border-radius: 18px;
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.25);
+            text-align: left;
+        }
+
+        #calisma-panel h2 {
+            color: #a78bfa;
+            text-align: center;
+            font-size: 28px;
+            margin-bottom: 25px;
+        }
+
+        #calisma-panel h3 {
+            color: #c4b5fd;
+            margin-top: 0;
+        }
+
+        #calisma-panel [hidden] {
+            display: none !important;
+        }
+
+        .calisma-alan {
+            background: #263449;
+            padding: 20px;
+            margin-bottom: 20px;
+            border-radius: 12px;
+        }
+
+        .calisma-alan label {
+            display: block;
+            color: #cbd5e1;
+            margin: 12px 0 7px;
+        }
+
+        .calisma-alan select,
+        .calisma-alan input {
+            width: 100%;
+            box-sizing: border-box;
+            padding: 12px;
+            background: #101827;
+            color: white;
+            border: 1px solid #475569;
+            border-radius: 8px;
+            font-size: 16px;
+        }
+
+        .calisma-alan select:focus,
+        .calisma-alan input:focus {
+            border-color: #a78bfa;
+            outline: none;
+        }
+
+        #calisma-sayaci {
+            color: #a78bfa;
+            font-size: 48px;
+            font-weight: bold;
+            text-align: center;
+            margin: 30px 0;
+        }
+
+        #calisma-durum {
+            color: #cbd5e1;
+            text-align: center;
+            min-height: 24px;
+            margin-bottom: 20px;
+        }
+
+        .calisma-butonlar {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-top: 15px;
+        }
+
+        .calisma-butonlar button {
+            flex: 1;
+            min-width: 120px;
+            padding: 13px;
+            background: #8b5cf6;
+            color: white;
+            border: none;
+            border-radius: 9px;
+            font-size: 15px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+        .calisma-butonlar button:hover {
+            background: #7c3aed;
+            transform: translateY(-2px);
+        }
+
+        #calisma-bitir {
+            background: #dc4545;
+        }
+
+        #calisma-bitir:hover {
+            background: #b91c1c;
+        }
+
+        #mola-geri {
+            background: #475569;
+        }
+
+        #mola-geri:hover {
+            background: #334155;
+        }
+
+        #calisma-sonraki-adim {
+            margin-top: 25px;
+        }
+
+        #calisma-sonraki-adim p {
+            color: #cbd5e1;
+        }
+
+        @media (max-width: 600px) {
+
+            #calisma-panel {
+                margin: 25px 10px;
+                padding: 20px;
+            }
+
+            #calisma-panel h2 {
+                font-size: 23px;
+            }
+
+            #calisma-sayaci {
+                font-size: 40px;
+            }
+
+            .calisma-butonlar {
+                flex-direction: column;
+            }
+
+            .calisma-butonlar button {
+                width: 100%;
+            }
+
+        }
+
+        /* ODAK MODU */
+
+        #calisma-panel.odak-acik {
+            position: fixed;
+            inset: 0;
+            z-index: 9999;
+
+            width: auto;
+            max-width: none;
+            min-height: 100vh;
+
+            margin: 0;
+            box-sizing: border-box;
+
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+
+            padding: 30px;
+            border-radius: 0;
+
+            background: #101827;
+            text-align: center;
+        }
+
+        #calisma-panel.odak-acik h2 {
+            display: none;
+        }
+
+        #calisma-panel.odak-acik #calisma-ayarlar,
+        #calisma-panel.odak-acik #mola-ayarlar,
+        #calisma-panel.odak-acik #calisma-sonraki-adim {
+            display: none !important;
+        }
+
+        #odak-baslik {
+            color: #c4b5fd;
+            font-size: 28px;
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        #calisma-panel.odak-acik #odak-baslik:not([hidden]) {
+            display: block;
+        }
+
+        #calisma-panel.odak-acik #calisma-sayaci {
+            font-size: clamp(55px, 12vw, 110px);
+            margin: 25px 0;
+            letter-spacing: 3px;
+        }
+
+        #calisma-panel.odak-acik #calisma-durum {
+            font-size: 18px;
+            max-width: 600px;
+        }
+
+        #calisma-panel.odak-acik .calisma-butonlar {
+            width: 100%;
+            max-width: 650px;
+            justify-content: center;
+        }
+
+        #calisma-panel.odak-acik .calisma-butonlar button {
+            min-width: 150px;
+            padding: 16px;
+            font-size: 16px;
+        }
+
+        /* GERÇEK TAM EKRAN */
+
+        #calisma-panel:fullscreen {
+            width: 100%;
+            height: 100%;
+            max-width: none;
+            margin: 0;
+            border-radius: 0;
+            background: #101827;
+        }
+
+        /* MOBİL ODAK MODU */
+
+        @media (max-width: 600px) {
+
+            #calisma-panel.odak-acik {
+                padding: 20px;
+            }
+
+            #calisma-panel.odak-acik #calisma-sayaci {
+                font-size: clamp(42px, 13vw, 75px);
+            }
+
+            #calisma-panel.odak-acik .calisma-butonlar {
+                flex-direction: column;
+            }
+
+            #calisma-panel.odak-acik .calisma-butonlar button {
+                width: 100%;
+            }
+
+        }
     </style>
 </head>
 
@@ -263,277 +521,419 @@
 
 
 <body>
-    <aside>
 
 
-        <h1>YKS'ye Ne Kadar Kaldı?</h1>
-        <p>HEDEFE ULAŞMAK İÇİN ASLA VAZGEÇME!</p>
-        <nav>
-            <a href="#"></a>
-            <a href="#"></a>
-            <a href="#"></a>
-        </nav>
 
-        <div class="sayac">
-            <div class="kutu">
-                <div class="sayi" id="gun">0</div>
-                <div class="aciklama">Gün</div>
-            </div>
+    <h1>YKS'ye Ne Kadar Kaldı?</h1>
+    <p>HEDEFE ULAŞMAK İÇİN ASLA VAZGEÇME!</p>
+    <nav>
+        <a href="#"></a>
+        <a href="#"></a>
+        <a href="#"></a>
+    </nav>
 
-            <div class="kutu">
-                <div class="sayi" id="saat">0</div>
-                <div class="aciklama">Saat</div>
-            </div>
-
-            <div class="kutu">
-                <div class="sayi" id="dakika">0</div>
-                <div class="aciklama">Dakika</div>
-            </div>
-
-            <div class="kutu">
-                <div class="sayi" id="saniye">0</div>
-                <div class="aciklama">Saniye</div>
-            </div>
+    <div class="sayac">
+        <div class="kutu">
+            <div class="sayi" id="gun">0</div>
+            <div class="aciklama">Gün</div>
         </div>
 
-        <center>
-            <h1 id="ykstablo">SINAV BİLGİLERİ</h1>
-        </center>
-        <div class="tabloalani">
+        <div class="kutu">
+            <div class="sayi" id="saat">0</div>
+            <div class="aciklama">Saat</div>
+        </div>
+
+        <div class="kutu">
+            <div class="sayi" id="dakika">0</div>
+            <div class="aciklama">Dakika</div>
+        </div>
+
+        <div class="kutu">
+            <div class="sayi" id="saniye">0</div>
+            <div class="aciklama">Saniye</div>
+        </div>
+    </div>
+    <div class="sayac sayac-gun-dagilimi">
+
+        <div class="kutu">
+            <div class="sayi" id="haftaIci">0</div>
+            <div class="aciklama">Hafta İçi</div>
+        </div>
+
+        <div class="kutu">
+            <div class="sayi" id="haftaSonu">0</div>
+            <div class="aciklama">Hafta Sonu</div>
+        </div>
+
+    </div>
+
+
+    <center>
+        <h1 id="ykstablo">SINAV BİLGİLERİ</h1>
+    </center>
+    <div class="tabloalani">
+        <table>
+            <th colspan="2">TYT</th>
+            <tr>
+                <th>SORU SAYISI</th>
+                <th>120</th>
+            </tr>
+            <tr>
+                <td>SINAV SÜRESİ:</td>
+                <td>165DK</td>
+            </tr>
+            <tr>
+                <td>TARİH</td>
+                <td>20 Haziran 2027</td>
+            </tr>
+
+
+
+        </table class="b">
+        <table>
+            <th colspan="2">AYT</th>
+            <tr>
+                <th>SORU SAYISI</th>
+                <th>120</th>
+            </tr>
+            <tr>
+                <td>SINAV SÜRESİ:</td>
+                <td>165DK</td>
+            </tr>
+            <tr>
+                <td>TARİH</td>
+                <td>20 Haziran 2027</td>
+            </tr>
             <table>
-                <th colspan="2">TYT</th>
+                <th colspan="2">YDS</th>
                 <tr>
                     <th>SORU SAYISI</th>
-                    <th>120</th>
+                    <th>80</th>
                 </tr>
                 <tr>
-                    <td>SINAV SÜRESİ:</td>
-                    <td>165DK</td>
+                    <td>SINAV SÜRESİ</td>
+                    <td>180DK</td>
                 </tr>
                 <tr>
                     <td>TARİH</td>
                     <td>20 Haziran 2027</td>
                 </tr>
-
-
-
-            </table class="b">
-            <table>
-                <th colspan="2">AYT</th>
-                <tr>
-                    <th>SORU SAYISI</th>
-                    <th>120</th>
-                </tr>
-                <tr>
-                    <td>SINAV SÜRESİ:</td>
-                    <td>165DK</td>
-                </tr>
-                <tr>
-                    <td>TARİH</td>
-                    <td>20 Haziran 2027</td>
-                </tr>
-                <table>
-                    <th colspan="2">YDS</th>
-                    <tr>
-                        <th>SORU SAYISI</th>
-                        <th>80</th>
-                    </tr>
-                    <tr>
-                        <td>SINAV SÜRESİ</td>
-                        <td>180DK</td>
-                    </tr>
-                    <tr>
-                        <td>TARİH</td>
-                        <td>20 Haziran 2027</td>
-                    </tr>
-                </table>
-
-
-
             </table>
+
+
+
+        </table>
+    </div>
+
+
+
+
+    <section id="net-hesaplama">
+
+        <h2>Net Hesaplama</h2>
+
+        <label for="sinav">Sınav Türü:</label>
+
+        <select id="sinav" onchange="sinavDegistir()">
+            <option value="TYT">TYT</option>
+            <option value="AYT">AYT</option>
+        </select>
+
+
+
+
+
+        <div id="tyt-dersler">
+            <div class="ders" data-soru="40">
+
+                <h3>Türkçe</h3>
+                <input type="number" class="dogru" placeholder="Doğru">
+                <input type="number" class="yanlis" placeholder="Yanlış">
+                <p class="ders-sonuc">Türkçe Neti: 0.00</p>
+            </div>
+
+
+            <div class="ders" data-soru="20">
+                <h3>Sosyal Bilimler</h3>
+                <input type="number" class="dogru" placeholder="Doğru">
+                <input type="number" class="yanlis" placeholder="Yanlış">
+                <p class="ders-sonuc">Sosyal Bilimler Neti: 0.00</p>
+            </div>
+
+            <div class="ders" data-soru="40">
+                <h3>Matematik</h3>
+                <input type="number" class="dogru" placeholder="Doğru">
+                <input type="number" class="yanlis" placeholder="Yanlış">
+                <p class="ders-sonuc">Matematik Neti: 0.00</p>
+            </div>
+
+            <div class="ders" data-soru="20">
+                <h3>Fen Bilimleri</h3>
+                <input type="number" class="dogru" placeholder="Doğru">
+                <input type="number" class="yanlis" placeholder="Yanlış">
+                <p class="ders-sonuc">Fen Neti: 0.00</p>
+            </div>
         </div>
 
+        <div id="ayt-dersler" hidden>
 
+            <!-- 1. MATEMATİK TESTİ -->
+            <div class="ayt-grup">
 
-
-        <section id="net-hesaplama">
-
-            <h2>Net Hesaplama</h2>
-
-            <label for="sinav">Sınav Türü:</label>
-
-            <select id="sinav" onchange="sinavDegistir()">
-                <option value="TYT">TYT</option>
-                <option value="AYT">AYT</option>
-            </select>
-
-
-
-
-
-            <div id="tyt-dersler">
-                <div class="ders" data-soru="40">
-
-                    <h3>Türkçe</h3>
-                    <input type="number" class="dogru" placeholder="Doğru">
-                    <input type="number" class="yanlis" placeholder="Yanlış">
-                    <p class="ders-sonuc">Türkçe Neti: 0.00</p>
-                </div>
-
-
-                <div class="ders" data-soru="20">
-                    <h3>Sosyal Bilimler</h3>
-                    <input type="number" class="dogru" placeholder="Doğru">
-                    <input type="number" class="yanlis" placeholder="Yanlış">
-                    <p class="ders-sonuc">Sosyal Bilimler Neti: 0.00</p>
-                </div>
+                <h3 class="grup-baslik">Matematik Testi</h3>
 
                 <div class="ders" data-soru="40">
                     <h3>Matematik</h3>
-                    <input type="number" class="dogru" placeholder="Doğru">
-                    <input type="number" class="yanlis" placeholder="Yanlış">
+                    <input type="number" class="dogru" placeholder="Doğru" min="0">
+                    <input type="number" class="yanlis" placeholder="Yanlış" min="0">
                     <p class="ders-sonuc">Matematik Neti: 0.00</p>
                 </div>
 
-                <div class="ders" data-soru="20">
-                    <h3>Fen Bilimleri</h3>
-                    <input type="number" class="dogru" placeholder="Doğru">
-                    <input type="number" class="yanlis" placeholder="Yanlış">
-                    <p class="ders-sonuc">Fen Neti: 0.00</p>
-                </div>
-            </div>
-
-            <div id="ayt-dersler" hidden>
-
-                <!-- 1. MATEMATİK TESTİ -->
-                <div class="ayt-grup">
-
-                    <h3 class="grup-baslik">Matematik Testi</h3>
-
-                    <div class="ders" data-soru="40">
-                        <h3>Matematik</h3>
-                        <input type="number" class="dogru" placeholder="Doğru" min="0">
-                        <input type="number" class="yanlis" placeholder="Yanlış" min="0">
-                        <p class="ders-sonuc">Matematik Neti: 0.00</p>
-                    </div>
-
-                    <p class="grup-sonuc">Matematik Testi Neti: 0.00</p>
-
-                </div>
-
-
-                <!-- 2. FEN BİLİMLERİ -->
-                <div class="ayt-grup">
-
-                    <h3 class="grup-baslik">Fen Bilimleri Testi</h3>
-
-                    <div class="ders" data-soru="14">
-                        <h3>Fizik</h3>
-                        <input type="number" class="dogru" placeholder="Doğru" min="0">
-                        <input type="number" class="yanlis" placeholder="Yanlış" min="0">
-                        <p class="ders-sonuc">Fizik Neti: 0.00</p>
-                    </div>
-
-                    <div class="ders" data-soru="13">
-                        <h3>Kimya</h3>
-                        <input type="number" class="dogru" placeholder="Doğru" min="0">
-                        <input type="number" class="yanlis" placeholder="Yanlış" min="0">
-                        <p class="ders-sonuc">Kimya Neti: 0.00</p>
-                    </div>
-
-                    <div class="ders" data-soru="13">
-                        <h3>Biyoloji</h3>
-                        <input type="number" class="dogru" placeholder="Doğru" min="0">
-                        <input type="number" class="yanlis" placeholder="Yanlış" min="0">
-                        <p class="ders-sonuc">Biyoloji Neti: 0.00</p>
-                    </div>
-
-                    <p class="grup-sonuc">Fen Bilimleri Neti: 0.00</p>
-
-                </div>
-
-
-                <!-- 3. EDEBİYAT VE SOSYAL BİLİMLER-1 -->
-                <div class="ayt-grup">
-
-                    <h3 class="grup-baslik">
-                        Türk Dili ve Edebiyatı - Sosyal Bilimler-1
-                    </h3>
-
-                    <div class="ders" data-soru="24">
-                        <h3>Türk Dili ve Edebiyatı</h3>
-                        <input type="number" class="dogru" placeholder="Doğru" min="0">
-                        <input type="number" class="yanlis" placeholder="Yanlış" min="0">
-                        <p class="ders-sonuc">Edebiyat Neti: 0.00</p>
-                    </div>
-
-                    <div class="ders" data-soru="10">
-                        <h3>Tarih-1</h3>
-                        <input type="number" class="dogru" placeholder="Doğru" min="0">
-                        <input type="number" class="yanlis" placeholder="Yanlış" min="0">
-                        <p class="ders-sonuc">Tarih-1 Neti: 0.00</p>
-                    </div>
-
-                    <div class="ders" data-soru="6">
-                        <h3>Coğrafya-1</h3>
-                        <input type="number" class="dogru" placeholder="Doğru" min="0">
-                        <input type="number" class="yanlis" placeholder="Yanlış" min="0">
-                        <p class="ders-sonuc">Coğrafya-1 Neti: 0.00</p>
-                    </div>
-
-                    <p class="grup-sonuc">Edebiyat-Sosyal 1 Neti: 0.00</p>
-
-                </div>
-
-
-                <!-- 4. SOSYAL BİLİMLER-2 -->
-                <div class="ayt-grup">
-
-                    <h3 class="grup-baslik">Sosyal Bilimler-2</h3>
-
-                    <div class="ders" data-soru="11">
-                        <h3>Tarih-2</h3>
-                        <input type="number" class="dogru" placeholder="Doğru" min="0">
-                        <input type="number" class="yanlis" placeholder="Yanlış" min="0">
-                        <p class="ders-sonuc">Tarih-2 Neti: 0.00</p>
-                    </div>
-
-                    <div class="ders" data-soru="11">
-                        <h3>Coğrafya-2</h3>
-                        <input type="number" class="dogru" placeholder="Doğru" min="0">
-                        <input type="number" class="yanlis" placeholder="Yanlış" min="0">
-                        <p class="ders-sonuc">Coğrafya-2 Neti: 0.00</p>
-                    </div>
-
-                    <div class="ders" data-soru="12">
-                        <h3>Felsefe Grubu</h3>
-                        <input type="number" class="dogru" placeholder="Doğru" min="0">
-                        <input type="number" class="yanlis" placeholder="Yanlış" min="0">
-                        <p class="ders-sonuc">Felsefe Neti: 0.00</p>
-                    </div>
-
-                    <div class="ders" data-soru="6">
-                        <h3>Din Kültürü / Alternatif Felsefe</h3>
-                        <input type="number" class="dogru" placeholder="Doğru" min="0">
-                        <input type="number" class="yanlis" placeholder="Yanlış" min="0">
-                        <p class="ders-sonuc">Din / Alternatif Felsefe Neti: 0.00</p>
-                    </div>
-
-                    <p class="grup-sonuc">Sosyal Bilimler-2 Neti: 0.00</p>
-
-                </div>
+                <p class="grup-sonuc">Matematik Testi Neti: 0.00</p>
 
             </div>
 
-            <button onclick="netHesapla()">
-                Net Hesapla
+
+            <!-- 2. FEN BİLİMLERİ -->
+            <div class="ayt-grup">
+
+                <h3 class="grup-baslik">Fen Bilimleri Testi</h3>
+
+                <div class="ders" data-soru="14">
+                    <h3>Fizik</h3>
+                    <input type="number" class="dogru" placeholder="Doğru" min="0">
+                    <input type="number" class="yanlis" placeholder="Yanlış" min="0">
+                    <p class="ders-sonuc">Fizik Neti: 0.00</p>
+                </div>
+
+                <div class="ders" data-soru="13">
+                    <h3>Kimya</h3>
+                    <input type="number" class="dogru" placeholder="Doğru" min="0">
+                    <input type="number" class="yanlis" placeholder="Yanlış" min="0">
+                    <p class="ders-sonuc">Kimya Neti: 0.00</p>
+                </div>
+
+                <div class="ders" data-soru="13">
+                    <h3>Biyoloji</h3>
+                    <input type="number" class="dogru" placeholder="Doğru" min="0">
+                    <input type="number" class="yanlis" placeholder="Yanlış" min="0">
+                    <p class="ders-sonuc">Biyoloji Neti: 0.00</p>
+                </div>
+
+                <p class="grup-sonuc">Fen Bilimleri Neti: 0.00</p>
+
+            </div>
+
+
+            <!-- 3. EDEBİYAT VE SOSYAL BİLİMLER-1 -->
+            <div class="ayt-grup">
+
+                <h3 class="grup-baslik">
+                    Türk Dili ve Edebiyatı - Sosyal Bilimler-1
+                </h3>
+
+                <div class="ders" data-soru="24">
+                    <h3>Türk Dili ve Edebiyatı</h3>
+                    <input type="number" class="dogru" placeholder="Doğru" min="0">
+                    <input type="number" class="yanlis" placeholder="Yanlış" min="0">
+                    <p class="ders-sonuc">Edebiyat Neti: 0.00</p>
+                </div>
+
+                <div class="ders" data-soru="10">
+                    <h3>Tarih-1</h3>
+                    <input type="number" class="dogru" placeholder="Doğru" min="0">
+                    <input type="number" class="yanlis" placeholder="Yanlış" min="0">
+                    <p class="ders-sonuc">Tarih-1 Neti: 0.00</p>
+                </div>
+
+                <div class="ders" data-soru="6">
+                    <h3>Coğrafya-1</h3>
+                    <input type="number" class="dogru" placeholder="Doğru" min="0">
+                    <input type="number" class="yanlis" placeholder="Yanlış" min="0">
+                    <p class="ders-sonuc">Coğrafya-1 Neti: 0.00</p>
+                </div>
+
+                <p class="grup-sonuc">Edebiyat-Sosyal 1 Neti: 0.00</p>
+
+            </div>
+
+
+            <!-- 4. SOSYAL BİLİMLER-2 -->
+            <div class="ayt-grup">
+
+                <h3 class="grup-baslik">Sosyal Bilimler-2</h3>
+
+                <div class="ders" data-soru="11">
+                    <h3>Tarih-2</h3>
+                    <input type="number" class="dogru" placeholder="Doğru" min="0">
+                    <input type="number" class="yanlis" placeholder="Yanlış" min="0">
+                    <p class="ders-sonuc">Tarih-2 Neti: 0.00</p>
+                </div>
+
+                <div class="ders" data-soru="11">
+                    <h3>Coğrafya-2</h3>
+                    <input type="number" class="dogru" placeholder="Doğru" min="0">
+                    <input type="number" class="yanlis" placeholder="Yanlış" min="0">
+                    <p class="ders-sonuc">Coğrafya-2 Neti: 0.00</p>
+                </div>
+
+                <div class="ders" data-soru="12">
+                    <h3>Felsefe Grubu</h3>
+                    <input type="number" class="dogru" placeholder="Doğru" min="0">
+                    <input type="number" class="yanlis" placeholder="Yanlış" min="0">
+                    <p class="ders-sonuc">Felsefe Neti: 0.00</p>
+                </div>
+
+                <div class="ders" data-soru="6">
+                    <h3>Din Kültürü / Alternatif Felsefe</h3>
+                    <input type="number" class="dogru" placeholder="Doğru" min="0">
+                    <input type="number" class="yanlis" placeholder="Yanlış" min="0">
+                    <p class="ders-sonuc">Din / Alternatif Felsefe Neti: 0.00</p>
+                </div>
+
+                <p class="grup-sonuc">Sosyal Bilimler-2 Neti: 0.00</p>
+
+            </div>
+
+        </div>
+
+        <button onclick="netHesapla()">
+            Net Hesapla
+        </button>
+
+        <p id="sonuc">Toplam Netin: 0.00</p>
+        <button type="button" onclick="sifirla()">Temizle</button>
+
+
+    </section>
+
+
+
+    <!-- ÇALIŞMA TAKİP PANELİ -->
+
+    <section id="calisma-panel">
+
+        <h2>Günlük Çalışma Paneli</h2>
+        <h3 id="odak-baslik" hidden>Çalışma Modu</h3>
+        <!-- ÇALIŞMA AYARLARI -->
+
+        <div id="calisma-ayarlar" class="calisma-alan">
+
+            <h3>Yeni Çalışma</h3>
+
+            <label for="calisma-dersi">Çalışacağın Ders:</label>
+
+            <select id="calisma-dersi">
+                <option value="Türkçe">Türkçe</option>
+                <option value="Matematik">Matematik</option>
+                <option value="Fizik">Fizik</option>
+                <option value="Kimya">Kimya</option>
+                <option value="Biyoloji">Biyoloji</option>
+                <option value="Tarih">Tarih</option>
+                <option value="Coğrafya">Coğrafya</option>
+                <option value="Felsefe">Felsefe</option>
+                <option value="İngilizce">İngilizce</option>
+                <option value="Diğer">Diğer</option>
+            </select>
+
+            <label for="calisma-suresi">Çalışma Süresi (Dakika):</label>
+
+            <input type="number" id="calisma-suresi" min="1" max="600" value="45">
+
+            <div class="calisma-butonlar">
+                <button type="button" id="calisma-baslat" onclick="calismaBaslat()">
+                    Çalışmaya Başla
+                </button>
+            </div>
+
+        </div>
+
+
+        <!-- ORTAK ZAMANLAYICI -->
+
+        <div id="calisma-sayaci">00:00:00</div>
+
+        <p id="calisma-durum">
+            Dersini ve çalışma süreni seçerek başlayabilirsin.
+        </p>
+
+        <div class="calisma-butonlar">
+
+            <button type="button" id="odak-buyut" onclick="odakModunuAc()" hidden>
+                Büyüt
             </button>
 
-            <p id="sonuc">Toplam Netin: 0.00</p>
-            <button type="button" onclick="sifirla()">Temizle</button>
+            <button type="button" id="calisma-duraklat" onclick="calismaDuraklat()" hidden>
+                Duraklat
+            </button>
+
+            <button type="button" id="calisma-devam" onclick="calismaDevamEt()" hidden>
+                Devam Et
+            </button>
+
+            <button type="button" id="calisma-bitir" onclick="calismaBitir()" hidden>
+                Çalışmayı Bitir
+            </button>
+
+            <button type="button" id="odak-tam-ekran" onclick="tamEkranaGec()" hidden>
+                Tam Ekrana Geç
+            </button>
+
+            <button type="button" id="odak-kucult" onclick="odakModunuKapat()" hidden>
+                Küçült
+            </button>
+
+        </div>
 
 
-        </section>
+        <!-- ÇALIŞMA TAMAMLANDIKTAN SONRAKİ SEÇİMLER -->
+
+        <div id="calisma-sonraki-adim" class="calisma-alan" hidden>
+
+            <h3>Çalışma oturumu tamamlandı!</h3>
+
+            <p>Şimdi nasıl devam etmek istersin?</p>
+
+            <div class="calisma-butonlar">
+
+                <button type="button" id="mola-sec" onclick="molaSec()">
+                    Mola Ver
+                </button>
+
+                <button type="button" id="yeni-calisma-sec" onclick="yeniCalismaSec()">
+                    Yeni Çalışmaya Başla
+                </button>
+
+            </div>
+
+        </div>
+
+
+        <!-- MOLA AYARLARI -->
+
+        <div id="mola-ayarlar" class="calisma-alan" hidden>
+
+            <h3>Mola Ayarları</h3>
+
+            <label for="mola-suresi">Mola Süresi (Dakika):</label>
+
+            <input type="number" id="mola-suresi" min="1" max="180" value="15">
+
+            <div class="calisma-butonlar">
+
+                <button type="button" id="mola-baslat" onclick="molaBaslat()">
+                    Molayı Başlat
+                </button>
+
+                <button type="button" id="mola-geri" onclick="molaGeriDon()">
+                    Geri Dön
+                </button>
+
+            </div>
+
+        </div>
+
+    </section>
 
 
 
@@ -560,188 +960,861 @@
 
 
 
+    <script>
+        // Örnek tarih, resmi sınav tarihine göre güncelle.
+        const hedefTarih = new Date("2027-06-20T10:15:00");
+        function kalanGunleriHesapla() {
 
+            const bugun = new Date();
+            bugun.setHours(0, 0, 0, 0);
 
-        <script>
-            // Örnek tarih, resmi sınav tarihine göre güncelle.
-            const hedefTarih = new Date("2027-06-20T10:15:00");
+            const hedefGun = new Date(hedefTarih);
+            hedefGun.setHours(0, 0, 0, 0);
 
-            function sayaciGuncelle() {
-                const simdi = new Date();
-                const fark = hedefTarih - simdi;
+            let haftaIci = 0;
+            let haftaSonu = 0;
 
-                if (fark <= 0) {
-                    document.body.innerHTML = "<h1>Başarılar!</h1>";
-                    return;
+            const tarih = new Date(bugun);
+
+            // Bugünden sonraki günleri saymaya başla.
+            tarih.setDate(tarih.getDate() + 1);
+
+            while (tarih <= hedefGun) {
+
+                const gun = tarih.getDay();
+
+                // 0 = Pazar, 6 = Cumartesi
+                if (gun === 0 || gun === 6) {
+                    haftaSonu++;
+                } else {
+                    haftaIci++;
                 }
 
-                const gun = Math.floor(fark / (1000 * 60 * 60 * 24));
-                const saat = Math.floor((fark / (1000 * 60 * 60)) % 24);
-                const dakika = Math.floor((fark / (1000 * 60)) % 60);
-                const saniye = Math.floor((fark / 1000) % 60);
-
-                document.getElementById("gun").textContent = gun;
-                document.getElementById("saat").textContent = saat;
-                document.getElementById("dakika").textContent = dakika;
-                document.getElementById("saniye").textContent = saniye;
+                tarih.setDate(tarih.getDate() + 1);
             }
 
-            sayaciGuncelle();
-            setInterval(sayaciGuncelle, 1000);
-            function sifirla() {
+            document.getElementById("haftaIci").textContent = haftaIci;
+            document.getElementById("haftaSonu").textContent = haftaSonu;
+        }
 
-                const secilen = document.getElementById("sinav").value;
+        function sayaciGuncelle() {
+            const simdi = new Date();
+            const fark = hedefTarih - simdi;
 
-                const alan = document.getElementById(
-                    secilen.toLowerCase() + "-dersler"
-                );
+            if (fark <= 0) {
+                document.body.innerHTML = "<h1>Başarılar!</h1>";
+                return;
+            }
 
-                const dersler = alan.querySelectorAll(".ders");
+            const gun = Math.floor(fark / (1000 * 60 * 60 * 24));
+            const saat = Math.floor((fark / (1000 * 60 * 60)) % 24);
+            const dakika = Math.floor((fark / (1000 * 60)) % 60);
+            const saniye = Math.floor((fark / 1000) % 60);
 
-                dersler.forEach(ders => {
 
-                    ders.querySelector(".dogru").value = "";
-                    ders.querySelector(".yanlis").value = "";
+            document.getElementById("gun").textContent = gun;
+            document.getElementById("saat").textContent = saat;
+            document.getElementById("dakika").textContent = dakika;
+            document.getElementById("saniye").textContent = saniye;
+        }
+        kalanGunleriHesapla();
 
-                    const dersAdi = ders.querySelector("h3").textContent;
+        sayaciGuncelle();
+        setInterval(sayaciGuncelle, 1000);
+        function sifirla() {
 
-                    ders.querySelector(".ders-sonuc").textContent =
-                        dersAdi + " Neti: 0.00";
+            const secilen = document.getElementById("sinav").value;
 
-                });
+            const alan = document.getElementById(
+                secilen.toLowerCase() + "-dersler"
+            );
 
-                // AYT grup sonuçlarını sıfırla
+            const dersler = alan.querySelectorAll(".ders");
+
+            dersler.forEach(ders => {
+
+                ders.querySelector(".dogru").value = "";
+                ders.querySelector(".yanlis").value = "";
+
+                const dersAdi = ders.querySelector("h3").textContent;
+
+                ders.querySelector(".ders-sonuc").textContent =
+                    dersAdi + " Neti: 0.00";
+
+            });
+
+            // AYT grup sonuçlarını sıfırla
+
+            const gruplar = alan.querySelectorAll(".ayt-grup");
+
+            gruplar.forEach(grup => {
+
+                const grupAdi = grup.querySelector(".grup-baslik").textContent;
+
+                grup.querySelector(".grup-sonuc").textContent =
+                    grupAdi + " Neti: 0.00";
+
+            });
+
+            document.getElementById("sonuc").textContent =
+                "Toplam " + secilen + " Net: 0.00";
+
+        }
+        function netHesapla() {
+
+            let toplamNet = 0;
+
+            const secilen = document.getElementById("sinav").value;
+
+            const alan = document.getElementById(
+                secilen.toLowerCase() + "-dersler"
+            );
+
+            const dersler = alan.querySelectorAll(".ders");
+
+            dersler.forEach(ders => {
+
+                const dogru = Number(ders.querySelector(".dogru").value) || 0;
+                const yanlis = Number(ders.querySelector(".yanlis").value) || 0;
+
+                const net = dogru - (yanlis / 4);
+
+                const dersAdi = ders.querySelector("h3").textContent;
+
+                ders.querySelector(".ders-sonuc").textContent =
+                    dersAdi + " Neti: " + net.toFixed(2);
+
+                toplamNet += net;
+
+            });
+
+            // AYT grup netlerini hesapla
+
+            if (secilen === "AYT") {
 
                 const gruplar = alan.querySelectorAll(".ayt-grup");
 
                 gruplar.forEach(grup => {
 
-                    const grupAdi = grup.querySelector(".grup-baslik").textContent;
+                    let grupNeti = 0;
 
-                    grup.querySelector(".grup-sonuc").textContent =
-                        grupAdi + " Neti: 0.00";
+                    const grupDersleri = grup.querySelectorAll(".ders");
 
-                });
+                    grupDersleri.forEach(ders => {
 
-                document.getElementById("sonuc").textContent =
-                    "Toplam " + secilen + " Net: 0.00";
+                        const dogru = Number(ders.querySelector(".dogru").value) || 0;
+                        const yanlis = Number(ders.querySelector(".yanlis").value) || 0;
 
-            }
-            function netHesapla() {
-
-                let toplamNet = 0;
-
-                const secilen = document.getElementById("sinav").value;
-
-                const alan = document.getElementById(
-                    secilen.toLowerCase() + "-dersler"
-                );
-
-                const dersler = alan.querySelectorAll(".ders");
-
-                dersler.forEach(ders => {
-
-                    const dogru = Number(ders.querySelector(".dogru").value) || 0;
-                    const yanlis = Number(ders.querySelector(".yanlis").value) || 0;
-
-                    const net = dogru - (yanlis / 4);
-
-                    const dersAdi = ders.querySelector("h3").textContent;
-
-                    ders.querySelector(".ders-sonuc").textContent =
-                        dersAdi + " Neti: " + net.toFixed(2);
-
-                    toplamNet += net;
-
-                });
-
-                // AYT grup netlerini hesapla
-
-                if (secilen === "AYT") {
-
-                    const gruplar = alan.querySelectorAll(".ayt-grup");
-
-                    gruplar.forEach(grup => {
-
-                        let grupNeti = 0;
-
-                        const grupDersleri = grup.querySelectorAll(".ders");
-
-                        grupDersleri.forEach(ders => {
-
-                            const dogru = Number(ders.querySelector(".dogru").value) || 0;
-                            const yanlis = Number(ders.querySelector(".yanlis").value) || 0;
-
-                            grupNeti += dogru - (yanlis / 4);
-
-                        });
-
-                        grup.querySelector(".grup-sonuc").textContent =
-                            grup.querySelector(".grup-baslik").textContent +
-                            " Neti: " + grupNeti.toFixed(2);
+                        grupNeti += dogru - (yanlis / 4);
 
                     });
 
-                }
+                    grup.querySelector(".grup-sonuc").textContent =
+                        grup.querySelector(".grup-baslik").textContent +
+                        " Neti: " + grupNeti.toFixed(2);
 
-                document.getElementById("sonuc").textContent =
-                    "Toplam " + secilen + " Net: " + toplamNet.toFixed(2);
+                });
 
             }
 
-            function sinavDegistir() {
+            document.getElementById("sonuc").textContent =
+                "Toplam " + secilen + " Net: " + toplamNet.toFixed(2);
 
-                const secilen = document.getElementById("sinav").value;
+        }
 
-                document.getElementById("tyt-dersler").hidden =
-                    secilen !== "TYT";
+        function sinavDegistir() {
 
-                document.getElementById("ayt-dersler").hidden =
-                    secilen !== "AYT";
+            const secilen = document.getElementById("sinav").value;
 
-                document.getElementById("sonuc").textContent =
-                    "Toplam Net: 0.00";
-            }
+            document.getElementById("tyt-dersler").hidden =
+                secilen !== "TYT";
+
+            document.getElementById("ayt-dersler").hidden =
+                secilen !== "AYT";
+
+            document.getElementById("sonuc").textContent =
+                "Toplam Net: 0.00";
+        }
 
 
-            const dersler = document.querySelectorAll(".ders");
+        const dersler = document.querySelectorAll(".ders");
 
-            dersler.forEach(ders => {
+        dersler.forEach(ders => {
 
-                const toplamSoru = Number(ders.dataset.soru);
+            const toplamSoru = Number(ders.dataset.soru);
 
-                const dogru = ders.querySelector(".dogru");
-                const yanlis = ders.querySelector(".yanlis");
+            const dogru = ders.querySelector(".dogru");
+            const yanlis = ders.querySelector(".yanlis");
 
-                function kontrolEt() {
+            function kontrolEt() {
 
-                    let d = Number(dogru.value) || 0;
-                    let y = Number(yanlis.value) || 0;
+                let d = Number(dogru.value) || 0;
+                let y = Number(yanlis.value) || 0;
 
-                    if (d > toplamSoru) {
-                        d = toplamSoru;
-                        dogru.value = d;
-                    }
-
-                    if (y > toplamSoru - d) {
-                        y = toplamSoru - d;
-                        yanlis.value = y;
-                    }
-
-                    dogru.max = toplamSoru - y;
-                    yanlis.max = toplamSoru - d;
+                if (d > toplamSoru) {
+                    d = toplamSoru;
+                    dogru.value = d;
                 }
 
-                dogru.addEventListener("input", kontrolEt);
-                yanlis.addEventListener("input", kontrolEt);
+                if (y > toplamSoru - d) {
+                    y = toplamSoru - d;
+                    yanlis.value = y;
+                }
 
-            });
+                dogru.max = toplamSoru - y;
+                yanlis.max = toplamSoru - d;
+            }
+
+            dogru.addEventListener("input", kontrolEt);
+            yanlis.addEventListener("input", kontrolEt);
+
+        });
+
+
+        // ÇALIŞMA TAKİP SİSTEMİ
+
+        let aktifCalisma = null;
+        let calismaAraligi = null;
+
+        // Panelin hangi aşamada olduğunu takip et.
+        let panelDurumu = "calisma-hazir";
+
+        // Daha önce kaydedilmiş aktif oturumu yükle.
+        try {
+
+            aktifCalisma = JSON.parse(
+                localStorage.getItem("yksAktifCalisma")
+            );
+
+        } catch (hata) {
+
+            aktifCalisma = null;
+            localStorage.removeItem("yksAktifCalisma");
+
+        }
+
+        // Sayfa yenilendiğinde aktif oturumun türünü belirle.
+        if (aktifCalisma) {
+
+            const tur = aktifCalisma.tur || "calisma";
+
+            panelDurumu = tur === "mola"
+                ? "mola-aktif"
+                : "calisma-aktif";
+
+        }
+
+
+        // Aktif oturumu tarayıcıya kaydet.
+        function calismaKaydet() {
+
+            if (aktifCalisma) {
+
+                localStorage.setItem(
+                    "yksAktifCalisma",
+                    JSON.stringify(aktifCalisma)
+                );
+
+            } else {
+
+                localStorage.removeItem("yksAktifCalisma");
+
+            }
+
+        }
+
+
+        // Geçen süreyi hesapla.
+        function calismaGecenSure() {
+
+            if (!aktifCalisma) {
+                return 0;
+            }
+
+            let gecenSure = Number(aktifCalisma.gecenSureMs) || 0;
+
+            if (aktifCalisma.durum === "calisiyor") {
+
+                gecenSure += Date.now() - aktifCalisma.baslangicZamani;
+
+            }
+
+            return gecenSure;
+
+        }
+
+
+        // Milisaniyeyi saat:dakika:saniye biçimine dönüştür.
+        function calismaZamaniniFormatla(milisaniye) {
+
+            const toplamSaniye = Math.floor(milisaniye / 1000);
+
+            const saat = Math.floor(toplamSaniye / 3600);
+            const dakika = Math.floor((toplamSaniye % 3600) / 60);
+            const saniye = toplamSaniye % 60;
+
+            return (
+                String(saat).padStart(2, "0") + ":" +
+                String(dakika).padStart(2, "0") + ":" +
+                String(saniye).padStart(2, "0")
+            );
+
+        }
+
+
+        // Panelin görünümünü ve butonları güncelle.
+        function calismaArayuzunuGuncelle() {
+
+            const calismaAyarlari = document.getElementById("calisma-ayarlar");
+            const molaAyarlari = document.getElementById("mola-ayarlar");
+            const sonrakiAdim = document.getElementById("calisma-sonraki-adim");
+
+            const duraklat = document.getElementById("calisma-duraklat");
+            const devam = document.getElementById("calisma-devam");
+            const bitir = document.getElementById("calisma-bitir");
+
+            const aktif = aktifCalisma !== null;
+
+            const calisiyor =
+                aktif && aktifCalisma.durum === "calisiyor";
+
+            // Hangi ayar alanının görüneceğini belirle.
+            calismaAyarlari.hidden =
+                panelDurumu !== "calisma-hazir";
+
+            molaAyarlari.hidden =
+                panelDurumu !== "mola-hazir";
+
+            sonrakiAdim.hidden =
+                panelDurumu !== "secim";
+
+            // Oturum kontrol butonları.
+            duraklat.hidden = !calisiyor;
+
+            devam.hidden =
+                !aktif || calisiyor;
+
+            bitir.hidden = !aktif;
+
+            // Çalışma ve mola için bitirme butonunun yazısını değiştir.
+            if (aktif && (aktifCalisma.tur || "calisma") === "mola") {
+
+                bitir.textContent = "Molayı Bitir";
+
+            } else {
+
+                bitir.textContent = "Çalışmayı Bitir";
+
+            }
+            // Odak modu butonlarını güncelle.
+
+            const odakBuyut = document.getElementById("odak-buyut");
+            const odakTamEkran = document.getElementById("odak-tam-ekran");
+            const odakKucult = document.getElementById("odak-kucult");
+            const odakBaslik = document.getElementById("odak-baslik");
+
+            odakBuyut.hidden = !aktif;
+
+            odakTamEkran.hidden =
+                !document.getElementById("calisma-panel").classList.contains("odak-acik");
+
+            odakKucult.hidden =
+                !document.getElementById("calisma-panel").classList.contains("odak-acik");
+
+            odakBaslik.hidden = !aktif;
+
+            if (aktif) {
+
+                odakBaslik.textContent =
+                    (aktifCalisma.tur || "calisma") === "mola"
+                        ? "Mola Zamanı"
+                        : aktifCalisma.ders + " Çalışması";
+
+            }
+
+        }
+        // Odak görünümünü aç.
+        function odakModunuAc() {
+
+            if (!aktifCalisma) {
+                return;
+            }
+
+            const panel = document.getElementById("calisma-panel");
+
+            panel.classList.add("odak-acik");
+
+            calismaArayuzunuGuncelle();
+
+        }
+
+
+        // Odak görünümünü kapat.
+        function odakModunuKapat() {
+
+            const panel = document.getElementById("calisma-panel");
+
+            panel.classList.remove("odak-acik");
+
+            if (document.fullscreenElement === panel) {
+                document.exitFullscreen();
+            }
+
+            calismaArayuzunuGuncelle();
+
+        }
+
+
+        // Gerçek tam ekrana geç.
+        function tamEkranaGec() {
+
+            const panel = document.getElementById("calisma-panel");
+
+            if (!document.fullscreenEnabled || !panel.requestFullscreen) {
+
+                alert("Tarayıcın tam ekran özelliğini desteklemiyor.");
+                return;
+
+            }
+
+            if (document.fullscreenElement !== panel) {
+
+                panel.requestFullscreen().catch(hata => {
+
+                    alert("Tam ekran açılırken bir sorun oluştu.");
+
+                });
+
+            }
+
+        }
+
+
+        // Kullanıcı ESC ile tam ekrandan çıkarsa
+        // odak görünümünü koru.
+        document.addEventListener("fullscreenchange", function () {
+
+            calismaArayuzunuGuncelle();
+
+        });
+
+        // Yeni çalışma başlat.
+        function calismaBaslat() {
+
+            if (aktifCalisma || panelDurumu !== "calisma-hazir") {
+                return;
+            }
+
+            const ders = document.getElementById("calisma-dersi").value;
+
+            const sure = Number(
+                document.getElementById("calisma-suresi").value
+            );
+
+            if (!Number.isInteger(sure) || sure < 1 || sure > 600) {
+
+                alert("Lütfen 1 ile 600 dakika arasında geçerli bir süre gir.");
+                return;
+
+            }
+
+            aktifCalisma = {
+
+                tur: "calisma",
+                ders: ders,
+                planlananSure: sure * 60 * 1000,
+                gecenSureMs: 0,
+                baslangicZamani: Date.now(),
+                durum: "calisiyor"
+
+            };
+
+            panelDurumu = "calisma-aktif";
+
+            calismaKaydet();
+
+            document.getElementById("calisma-durum").textContent =
+                ders + " çalışması başladı.";
+
+            calismaArayuzunuGuncelle();
+
+            calismaZamanlayicisiniBaslat();
+
+        }
+
+
+        // Çalışma tamamlandıktan sonra mola seç.
+        function molaSec() {
+
+            if (aktifCalisma || panelDurumu !== "secim") {
+                return;
+            }
+
+            panelDurumu = "mola-hazir";
+
+            document.getElementById("calisma-durum").textContent =
+                "Mola süreni belirleyebilirsin.";
+
+            calismaArayuzunuGuncelle();
+
+        }
+
+
+        // Çalışma tamamlandıktan sonra yeni derse geç.
+        function yeniCalismaSec() {
+
+            if (aktifCalisma || panelDurumu !== "secim") {
+                return;
+            }
+
+            panelDurumu = "calisma-hazir";
+
+            document.getElementById("calisma-sayaci").textContent =
+                "00:00:00";
+
+            document.getElementById("calisma-durum").textContent =
+                "Yeni çalışma için dersini ve süreni seçebilirsin.";
+
+            calismaArayuzunuGuncelle();
+
+        }
+
+
+        // Mola ayarlarından seçim ekranına geri dön.
+        function molaGeriDon() {
+
+            if (aktifCalisma || panelDurumu !== "mola-hazir") {
+                return;
+            }
+
+            panelDurumu = "secim";
+
+            document.getElementById("calisma-durum").textContent =
+                "Mola veya yeni çalışma arasında seçim yapabilirsin.";
+
+            calismaArayuzunuGuncelle();
+
+        }
+
+
+        // Molayı başlat.
+        function molaBaslat() {
+
+            if (aktifCalisma || panelDurumu !== "mola-hazir") {
+                return;
+            }
+
+            const sure = Number(
+                document.getElementById("mola-suresi").value
+            );
+
+            if (!Number.isInteger(sure) || sure < 1 || sure > 180) {
+
+                alert("Lütfen 1 ile 180 dakika arasında geçerli bir mola süresi gir.");
+                return;
+
+            }
+
+            aktifCalisma = {
+
+                tur: "mola",
+                ders: null,
+                planlananSure: sure * 60 * 1000,
+                gecenSureMs: 0,
+                baslangicZamani: Date.now(),
+                durum: "calisiyor"
+
+            };
+
+            panelDurumu = "mola-aktif";
+
+            calismaKaydet();
+
+            document.getElementById("calisma-durum").textContent =
+                "Molan başladı. Dinlenmenin tadını çıkar!";
+
+            calismaArayuzunuGuncelle();
+
+            calismaZamanlayicisiniBaslat();
+
+        }
+
+
+        // Çalışmayı veya molayı duraklat.
+        function calismaDuraklat() {
+
+            if (!aktifCalisma || aktifCalisma.durum !== "calisiyor") {
+                return;
+            }
+
+            const tur = aktifCalisma.tur || "calisma";
+
+            aktifCalisma.gecenSureMs = calismaGecenSure();
+
+            aktifCalisma.baslangicZamani = null;
+
+            aktifCalisma.durum = "duraklatildi";
+
+            calismaKaydet();
+
+            document.getElementById("calisma-durum").textContent =
+                tur === "mola"
+                    ? "Mola duraklatıldı."
+                    : "Çalışma duraklatıldı.";
+
+            calismaArayuzunuGuncelle();
+
+            clearInterval(calismaAraligi);
+
+        }
+
+
+        // Duraklatılan çalışmaya veya molaya devam et.
+        function calismaDevamEt() {
+
+            if (!aktifCalisma || aktifCalisma.durum !== "duraklatildi") {
+                return;
+            }
+
+            const tur = aktifCalisma.tur || "calisma";
+
+            aktifCalisma.baslangicZamani = Date.now();
+
+            aktifCalisma.durum = "calisiyor";
+
+            calismaKaydet();
+
+            if (tur === "mola") {
+
+                document.getElementById("calisma-durum").textContent =
+                    "Molana devam ediyorsun.";
+
+            } else {
+
+                document.getElementById("calisma-durum").textContent =
+                    aktifCalisma.ders + " çalışmasına devam ediyorsun.";
+
+            }
+
+            calismaArayuzunuGuncelle();
+
+            calismaZamanlayicisiniBaslat();
+
+        }
+
+
+        // Çalışmayı veya molayı bitir.
+        function calismaBitir(otomatik = false) {
+
+            if (!aktifCalisma) {
+                return;
+            }
+
+            let gecenSure = calismaGecenSure();
+
+            if (otomatik) {
+
+                gecenSure = aktifCalisma.planlananSure;
+
+            }
+
+            const tur = aktifCalisma.tur || "calisma";
+
+            const ders = aktifCalisma.ders;
+
+            const gecenDakika = Math.floor(gecenSure / 60000);
+
+            const gecenSaniye = Math.floor(
+                (gecenSure % 60000) / 1000
+            );
+
+            clearInterval(calismaAraligi);
+
+            // Oturum bittiğinde odak görünümünü kapat.
+            odakModunuKapat();
+
+            aktifCalisma = null;
+
+            calismaKaydet();
+
+            // Çalışma bittiyse seçim ekranı, mola bittiyse yeni çalışma.
+            if (tur === "calisma") {
+
+                panelDurumu = "secim";
+
+            } else {
+
+                panelDurumu = "calisma-hazir";
+
+            }
+
+            calismaArayuzunuGuncelle();
+
+            document.getElementById("calisma-sayaci").textContent =
+                calismaZamaniniFormatla(gecenSure);
+
+
+            if (tur === "mola") {
+
+                if (otomatik) {
+
+                    document.getElementById("calisma-durum").textContent =
+                        "Molan tamamlandı. Yeni bir çalışmaya başlayabilirsin.";
+
+                } else {
+
+                    document.getElementById("calisma-durum").textContent =
+                        "Molayı bitirdin. Gerçek mola süren: " +
+                        gecenDakika + " dakika " +
+                        gecenSaniye + " saniye.";
+
+                }
+
+            } else {
+
+                if (otomatik) {
+
+                    document.getElementById("calisma-durum").textContent =
+                        ders + " çalışması tamamlandı. Hedef sürene ulaştın!";
+
+                } else {
+
+                    document.getElementById("calisma-durum").textContent =
+                        ders + " çalışmasını bitirdin. Gerçek çalışma süren: " +
+                        gecenDakika + " dakika " +
+                        gecenSaniye + " saniye.";
+
+                }
+
+            }
+
+        }
+
+
+        // Zamanlayıcıyı çalıştır.
+        function calismaZamanlayicisiniBaslat() {
+
+            clearInterval(calismaAraligi);
+
+            calismaDurumunuGuncelle();
+
+            if (aktifCalisma) {
+
+                calismaAraligi = setInterval(
+                    calismaDurumunuGuncelle,
+                    1000
+                );
+
+            }
+
+        }
+
+
+        // Her saniye kalan süreyi güncelle.
+        function calismaDurumunuGuncelle() {
+
+            if (!aktifCalisma || aktifCalisma.durum !== "calisiyor") {
+                return;
+            }
+
+            const gecenSure = calismaGecenSure();
+
+            const kalanSure =
+                aktifCalisma.planlananSure - gecenSure;
+
+            if (kalanSure <= 0) {
+
+                calismaBitir(true);
+                return;
+
+            }
+
+            document.getElementById("calisma-sayaci").textContent =
+                calismaZamaniniFormatla(kalanSure);
+
+        }
+
+
+        // Sayfa açıldığında kayıtlı oturumu kontrol et.
+        if (aktifCalisma) {
+
+            const tur = aktifCalisma.tur || "calisma";
+
+            if (tur === "calisma") {
+
+                document.getElementById("calisma-dersi").value =
+                    aktifCalisma.ders;
+
+                document.getElementById("calisma-suresi").value =
+                    aktifCalisma.planlananSure / 60000;
+
+            } else {
+
+                document.getElementById("mola-suresi").value =
+                    aktifCalisma.planlananSure / 60000;
+
+            }
+
+            calismaArayuzunuGuncelle();
+
+            if (aktifCalisma.durum === "calisiyor") {
+
+                if (tur === "mola") {
+
+                    document.getElementById("calisma-durum").textContent =
+                        "Molan kaldığı yerden devam ediyor.";
+
+                } else {
+
+                    document.getElementById("calisma-durum").textContent =
+                        aktifCalisma.ders +
+                        " çalışması kaldığı yerden devam ediyor.";
+
+                }
+
+                calismaZamanlayicisiniBaslat();
+
+            } else {
+
+                if (tur === "mola") {
+
+                    document.getElementById("calisma-durum").textContent =
+                        "Molan duraklatılmış durumda.";
+
+                } else {
+
+                    document.getElementById("calisma-durum").textContent =
+                        "Çalışman duraklatılmış durumda.";
+
+                }
+
+                const kalanSure =
+                    aktifCalisma.planlananSure - calismaGecenSure();
+
+                if (kalanSure <= 0) {
+
+                    calismaBitir(true);
+
+                } else {
+
+                    document.getElementById("calisma-sayaci").textContent =
+                        calismaZamaniniFormatla(kalanSure);
+
+                }
+
+            }
+
+        } else {
+
+            calismaArayuzunuGuncelle();
+
+        }
 
 
 
-        </script>
+    </script>
 
-    </aside>
+
 </body>
 
 </html>
