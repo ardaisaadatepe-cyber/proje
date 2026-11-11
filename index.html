@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html lang="tr">
-<!--ilk deneme  -->
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -387,6 +387,87 @@
 
         }
 
+        /* Sayfa içi yönlendirmelerin yumuşak kayması için */
+        html {
+            scroll-behavior: smooth;
+            scroll-padding-top: 90px;
+            /* Menü sabit olduğu için başlıkların altında kalmasını önler */
+        }
+
+        /* Ana Menü Kapsayıcısı */
+        .yonlendırme {
+            position: sticky;
+            top: 15px;
+            /* Ekranın en üstünden biraz aşağıda havada süzülme efekti */
+            z-index: 1000;
+
+            /* Ortalama ve Hizalama */
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 12px;
+            width: fit-content;
+            /* Sadece içindeki linkler kadar yer kaplar */
+            margin: 0 auto;
+            /* Sayfada tam ortalar */
+
+            /* Modern Buzlu Cam (Glassmorphism) Görünümü */
+            padding: 8px 16px;
+            background: rgba(255, 255, 255, 0.8);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.4);
+            border-radius: 50px;
+            /* Köşeleri tam yuvarlak yapar */
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.08);
+        }
+
+        /* Menü İçindeki Linkler */
+        .yonlendırme a {
+            text-decoration: none;
+            color: #2d3748;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            font-size: 14px;
+            font-weight: 700;
+            letter-spacing: 0.5px;
+            padding: 10px 20px;
+            border-radius: 30px;
+            transition: all 0.3s ease;
+        }
+
+        /* Fare İle Üzerine Gelindiğinde (Hover) */
+        .yonlendırme a:hover {
+            background-color: #4f46e5;
+            /* Modern İndigo/Mavi tonu */
+            color: #ffffff;
+            transform: translateY(-2px);
+            /* Hafif yukarı kalkma efekti */
+            box-shadow: 0 4px 12px rgba(79, 70, 229, 0.3);
+        }
+
+        /* Tıklanma Anı */
+        .yonlendırme a:active {
+            transform: translateY(0);
+        }
+
+        /* Mobil Ekranlar İçin Uyumluluk */
+        @media (max-width: 600px) {
+            .yonlendırme {
+                width: 92%;
+                gap: 5px;
+                padding: 6px 10px;
+            }
+
+            .yonlendırme a {
+                font-size: 12px;
+                padding: 8px 12px;
+                text-align: center;
+                flex: 1;
+                /* Mobilde 3 butonun genişliğini eşitler */
+            }
+        }
+
+
         /* ODAK MODU */
 
         #calisma-panel.odak-acik {
@@ -523,15 +604,15 @@
 <body>
 
 
-
-    <h1>YKS'ye Ne Kadar Kaldı?</h1>
-    <p>HEDEFE ULAŞMAK İÇİN ASLA VAZGEÇME!</p>
-    <nav>
-        <a href="#"></a>
-        <a href="#"></a>
-        <a href="#"></a>
+ <nav class="yonlendırme">
+        <a href="#ykssayac">SAYAÇ</a>
+        <a href="#nethesaplama">NET HESAPLAMA</a>
+        <a href="#pomodoro">POMODORO</a>
     </nav>
 
+    <h1 id="ykssayac">YKS'ye Ne Kadar Kaldı?</h1>
+    <p>HEDEFE ULAŞMAK İÇİN ASLA VAZGEÇME!</p>
+   
     <div class="sayac">
         <div class="kutu">
             <div class="sayi" id="gun">0</div>
@@ -543,7 +624,7 @@
             <div class="aciklama">Saat</div>
         </div>
 
-        <div class="kutu">
+        <div class="kutu" >
             <div class="sayi" id="dakika">0</div>
             <div class="aciklama">Dakika</div>
         </div>
@@ -630,7 +711,7 @@
 
     <section id="net-hesaplama">
 
-        <h2>Net Hesaplama</h2>
+        <h2 id="nethesaplama">Net Hesaplama</h2>
 
         <label for="sinav">Sınav Türü:</label>
 
@@ -813,7 +894,7 @@
 
     <section id="calisma-panel">
 
-        <h2>Günlük Çalışma Paneli</h2>
+        <h2 id="pomodoro">Günlük Çalışma Paneli</h2>
         <h3 id="odak-baslik" hidden>Çalışma Modu</h3>
         <!-- ÇALIŞMA AYARLARI -->
 
