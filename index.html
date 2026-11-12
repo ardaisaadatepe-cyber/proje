@@ -4,6 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
     <title>YKS Geri Sayım</title>
 
 
@@ -387,6 +388,114 @@
 
         }
 
+        #calisma-konusu {
+            width: 100%;
+            padding: 12px 15px;
+            margin-bottom: 15px;
+            border: 1px solid #343653;
+            border-radius: 8px;
+            background-color: #171a2e;
+            color: #ffffff;
+            font-size: 15px;
+            outline: none;
+            transition: border-color 0.3s ease;
+        }
+
+        #calisma-konusu:focus {
+            border-color: #8b5cf6;
+        }
+
+        #calisma-konusu::placeholder {
+            color: #85869b;
+        }
+
+        /* GEÇMİŞ ÇALIŞMALAR */
+
+        #calisma-gecmisi-alani {
+            margin-top: 25px;
+        }
+
+        .gecmis-gun {
+            background: #171a2e;
+            padding: 15px;
+            margin-top: 15px;
+            border-radius: 10px;
+            border: 1px solid #343653;
+        }
+
+        .gecmis-gun h4 {
+            color: #a78bfa;
+            margin-top: 0;
+        }
+
+        .gecmis-kayit {
+            padding: 12px;
+            margin-top: 10px;
+            background: #263449;
+            border-radius: 8px;
+            color: #cbd5e1;
+        }
+
+        .gecmis-kayit strong {
+            color: #ffffff;
+        }
+
+        .gecmis-toplam {
+            color: #a78bfa;
+            font-weight: bold;
+            margin-top: 12px;
+        }
+
+        .gecmis-sil-buton {
+            background: #dc4545;
+            color: white;
+            border: none;
+            padding: 9px 15px;
+            margin-top: 8px;
+            border-radius: 7px;
+            cursor: pointer;
+            font-size: 14px;
+            font-weight: bold;
+            transition: 0.3s;
+        }
+
+        .gecmis-sil-buton:hover {
+            background: #b91c1c;
+            transform: translateY(-2px);
+        }
+
+        .rapor-butonlari {
+            display: flex;
+            gap: 10px;
+            margin-top: 15px;
+            flex-wrap: wrap;
+        }
+
+        .rapor-indir-buton,
+        .rapor-paylas-buton {
+            padding: 10px 15px;
+            border: none;
+            border-radius: 7px;
+            color: white;
+            font-weight: bold;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+        .rapor-indir-buton {
+            background: #2563eb;
+        }
+
+        .rapor-paylas-buton {
+            background: #059669;
+        }
+
+        .rapor-indir-buton:hover,
+        .rapor-paylas-buton:hover {
+            transform: translateY(-2px);
+            opacity: 0.9;
+        }
+
         /* Sayfa içi yönlendirmelerin yumuşak kayması için */
         html {
             scroll-behavior: smooth;
@@ -498,11 +607,14 @@
             display: none;
         }
 
+
         #calisma-panel.odak-acik #calisma-ayarlar,
         #calisma-panel.odak-acik #mola-ayarlar,
-        #calisma-panel.odak-acik #calisma-sonraki-adim {
+        #calisma-panel.odak-acik #calisma-sonraki-adim,
+        #calisma-panel.odak-acik #calisma-gecmisi-alani {
             display: none !important;
         }
+
 
         #odak-baslik {
             color: #c4b5fd;
@@ -540,14 +652,19 @@
 
         /* GERÇEK TAM EKRAN */
 
+
         #calisma-panel:fullscreen {
             width: 100%;
             height: 100%;
             max-width: none;
             margin: 0;
+            padding: 30px;
+            box-sizing: border-box;
             border-radius: 0;
             background: #101827;
+            overflow-y: auto;
         }
+
 
         /* MOBİL ODAK MODU */
 
@@ -604,7 +721,7 @@
 <body>
 
 
- <nav class="yonlendırme">
+    <nav class="yonlendırme">
         <a href="#ykssayac">SAYAÇ</a>
         <a href="#nethesaplama">NET HESAPLAMA</a>
         <a href="#pomodoro">POMODORO</a>
@@ -612,7 +729,7 @@
 
     <h1 id="ykssayac">YKS'ye Ne Kadar Kaldı?</h1>
     <p>HEDEFE ULAŞMAK İÇİN ASLA VAZGEÇME!</p>
-   
+
     <div class="sayac">
         <div class="kutu">
             <div class="sayi" id="gun">0</div>
@@ -624,7 +741,7 @@
             <div class="aciklama">Saat</div>
         </div>
 
-        <div class="kutu" >
+        <div class="kutu">
             <div class="sayi" id="dakika">0</div>
             <div class="aciklama">Dakika</div>
         </div>
@@ -916,7 +1033,8 @@
                 <option value="İngilizce">İngilizce</option>
                 <option value="Diğer">Diğer</option>
             </select>
-
+            <label for="calisma-konusu">Çalışacağın Konu:</label>
+            <input type="text" id="calisma-konusu" placeholder="Örn: Fonksiyonlar" maxlength="100">
             <label for="calisma-suresi">Çalışma Süresi (Dakika):</label>
 
             <input type="number" id="calisma-suresi" min="1" max="600" value="45">
@@ -1013,7 +1131,17 @@
             </div>
 
         </div>
+        <!-- GEÇMİŞ ÇALIŞMALAR -->
 
+        <div id="calisma-gecmisi-alani" class="calisma-alan">
+
+            <h3>Geçmiş Çalışmalarım</h3>
+
+            <div id="calisma-gecmisi">
+                <p>Henüz tamamlanmış bir çalışman bulunmuyor.</p>
+            </div>
+
+        </div>
     </section>
 
 
@@ -1259,6 +1387,533 @@
 
         // Panelin hangi aşamada olduğunu takip et.
         let panelDurumu = "calisma-hazir";
+        // Aktif çalışma veya mola oturumunu kaydet.
+        function calismaKaydet() {
+
+            if (aktifCalisma) {
+
+                localStorage.setItem(
+                    "yksAktifCalisma",
+                    JSON.stringify(aktifCalisma)
+                );
+
+            } else {
+
+                localStorage.removeItem("yksAktifCalisma");
+
+            }
+
+        }
+        // Geçmiş çalışmaları localStorage'dan yükle.
+        function calismaGecmisiniYukle() {
+
+            try {
+
+                const kayitlar = JSON.parse(
+                    localStorage.getItem("yksCalismaGecmisi")
+                );
+
+                return Array.isArray(kayitlar) ? kayitlar : [];
+
+            } catch (hata) {
+
+                return [];
+
+            }
+
+        }
+
+        // Aynı oturumun aynı güne ait kayıtlarını birleştir.
+        function calismaKayitlariniBirlestir(kayitlar) {
+
+            const birlesikKayitlar = new Map();
+
+            kayitlar.forEach((kayit, index) => {
+
+                // 1 saniyeden kısa kayıtları geçmişe alma.
+                if (kayit.sureMs < 1000) {
+                    return;
+                }
+
+                // Eski kayıtlarda oturumId yoksa birbirine karıştırma.
+                const anahtar = kayit.oturumId !== undefined
+                    ? kayit.oturumId + "-" + kayit.tarih
+                    : "eski-" + index;
+
+                if (birlesikKayitlar.has(anahtar)) {
+
+                    const mevcut = birlesikKayitlar.get(anahtar);
+
+                    mevcut.sureMs += kayit.sureMs;
+                    mevcut.baslangic = Math.min(
+                        mevcut.baslangic,
+                        kayit.baslangic
+                    );
+                    mevcut.bitis = Math.max(
+                        mevcut.bitis,
+                        kayit.bitis
+                    );
+
+                } else {
+
+                    birlesikKayitlar.set(anahtar, { ...kayit });
+
+                }
+
+            });
+
+            return Array.from(birlesikKayitlar.values());
+
+        }
+
+        // Seçilen çalışma kaydını geçmişten sil.
+        function calismaKaydiniSil(silinecekKayit) {
+
+            const onay = confirm(
+                "Bu çalışma kaydını silmek istediğine emin misin?"
+            );
+
+            if (!onay) {
+                return;
+            }
+
+            let gecmis = calismaKayitlariniBirlestir(
+                calismaGecmisiniYukle()
+            );
+
+            // Yalnızca seçilen oturumu ve günü sil.
+            gecmis = gecmis.filter(kayit => {
+
+                if (silinecekKayit.oturumId !== undefined) {
+
+                    return !(
+                        kayit.oturumId === silinecekKayit.oturumId &&
+                        kayit.tarih === silinecekKayit.tarih
+                    );
+
+                }
+
+                // Eski kayıtlarda oturumId yoksa
+                // yalnızca eşleşen kaydı sil.
+                return !(
+                    kayit.tarih === silinecekKayit.tarih &&
+                    kayit.ders === silinecekKayit.ders &&
+                    kayit.konu === silinecekKayit.konu &&
+                    kayit.baslangic === silinecekKayit.baslangic &&
+                    kayit.bitis === silinecekKayit.bitis
+                );
+
+            });
+
+            localStorage.setItem(
+                "yksCalismaGecmisi",
+                JSON.stringify(gecmis)
+            );
+
+            // Geçmişi ve günlük toplamları yeniden göster.
+            calismaGecmisiniGoster();
+
+        }
+
+
+        // Tarihi YYYY-AA-GG biçiminde al.
+        function calismaTarihAnahtari(zaman) {
+
+            const tarih = new Date(zaman);
+
+            const yil = tarih.getFullYear();
+            const ay = String(tarih.getMonth() + 1).padStart(2, "0");
+            const gun = String(tarih.getDate()).padStart(2, "0");
+
+            return yil + "-" + ay + "-" + gun;
+
+        }
+
+
+        // Geçmişteki süreyi saat:dakika:saniye olarak göster.
+        function gecmisSuresiniFormatla(milisaniye) {
+
+            const toplamSaniye = Math.floor(milisaniye / 1000);
+
+            const saat = Math.floor(toplamSaniye / 3600);
+            const dakika = Math.floor((toplamSaniye % 3600) / 60);
+            const saniye = toplamSaniye % 60;
+
+            return (
+                String(saat).padStart(2, "0") + ":" +
+                String(dakika).padStart(2, "0") + ":" +
+                String(saniye).padStart(2, "0")
+            );
+
+        }
+
+
+        // Tamamlanan çalışmayı günlere bölerek geçmişe kaydet.
+        function calismaGecmisineEkle(oturum) {
+
+            let gecmis = calismaGecmisiniYukle();
+
+            const araliklar = oturum.calismaAraliklari || [];
+
+            araliklar.forEach(aralik => {
+
+                let baslangic = aralik.baslangic;
+                const bitis = aralik.bitis;
+
+                while (baslangic < bitis) {
+
+                    const gunSonu = new Date(baslangic);
+                    gunSonu.setHours(24, 0, 0, 0);
+
+                    const parcaBitis = Math.min(
+                        bitis,
+                        gunSonu.getTime()
+                    );
+
+                    const sure = parcaBitis - baslangic;
+
+                    // 1 saniyeden kısa parçaları kaydetme.
+                    if (sure >= 1000) {
+
+                        gecmis.push({
+
+                            oturumId: oturum.oturumId,
+                            tarih: calismaTarihAnahtari(baslangic),
+                            ders: oturum.ders,
+                            konu: oturum.konu,
+                            baslangic: baslangic,
+                            bitis: parcaBitis,
+                            sureMs: sure
+
+                        });
+
+                    }
+
+                    baslangic = parcaBitis;
+
+                }
+
+            });
+
+            // Aynı oturum ve güne ait parçaları tek kayda dönüştür.
+            gecmis = calismaKayitlariniBirlestir(gecmis);
+
+            localStorage.setItem(
+                "yksCalismaGecmisi",
+                JSON.stringify(gecmis)
+            );
+
+            calismaGecmisiniGoster();
+
+        }
+        async function gunlukRaporuOlustur(tarih, gunKayitlari, islem) {
+
+            const rapor = document.createElement("div");
+
+            rapor.style.width = "600px";
+            rapor.style.padding = "30px";
+            rapor.style.background = "#171a2e";
+            rapor.style.color = "#ffffff";
+            rapor.style.fontFamily = "Arial, sans-serif";
+            rapor.style.position = "fixed";
+            rapor.style.left = "-10000px";
+            rapor.style.top = "0";
+
+            let gunToplami = 0;
+
+            const tarihMetni = new Date(tarih + "T12:00:00")
+                .toLocaleDateString("tr-TR", {
+                    day: "numeric",
+                    month: "long",
+                    year: "numeric"
+                });
+
+            let kayitlarHTML = "";
+
+            gunKayitlari.forEach(kayit => {
+
+                gunToplami += kayit.sureMs;
+
+                const baslangic = new Date(kayit.baslangic)
+                    .toLocaleTimeString("tr-TR");
+
+                const bitis = new Date(kayit.bitis)
+                    .toLocaleTimeString("tr-TR");
+
+                kayitlarHTML += `
+            <div style="
+                background:#263449;
+                padding:15px;
+                margin-top:12px;
+                border-radius:8px;
+            ">
+                <h3 style="margin:0 0 8px;color:#a78bfa;">
+                    ${kayit.ders}
+                </h3>
+
+                <p style="margin:5px 0;">
+                    Konu: ${kayit.konu}
+                </p>
+
+                <p style="margin:5px 0;">
+                    Süre: ${gecmisSuresiniFormatla(kayit.sureMs)}
+                </p>
+
+                <p style="margin:5px 0;color:#94a3b8;">
+                    ${baslangic} - ${bitis}
+                </p>
+            </div>
+        `;
+            });
+
+            rapor.innerHTML = `
+        <div style="text-align:center;">
+            <h1 style="color:#a78bfa;">Günlük Çalışma Raporu</h1>
+            <p style="color:#cbd5e1;">${tarihMetni}</p>
+        </div>
+
+        <hr style="border:1px solid #343653;margin:20px 0;">
+
+        <h2>Çalışma Detayları</h2>
+
+        ${kayitlarHTML}
+
+        <div style="
+            margin-top:20px;
+            padding:18px;
+            background:#312e81;
+            border-radius:8px;
+            text-align:center;
+        ">
+            <h2 style="margin:0 0 8px;">Günlük Toplam</h2>
+            <h1 style="margin:0;color:#c4b5fd;">
+                ${gecmisSuresiniFormatla(gunToplami)}
+            </h1>
+        </div>
+
+        <p style="
+            text-align:center;
+            color:#94a3b8;
+            margin-top:25px;
+            font-size:12px;
+        ">
+            YKS Çalışma Takip Sistemi
+        </p>
+    `;
+
+            document.body.appendChild(rapor);
+
+            try {
+
+                const canvas = await html2canvas(rapor, {
+                    scale: 2,
+                    backgroundColor: "#171a2e"
+                });
+
+                const blob = await new Promise(resolve => {
+                    canvas.toBlob(resolve, "image/png");
+                });
+
+                if (!blob) {
+                    throw new Error("Görsel oluşturulamadı.");
+                }
+
+                const dosya = new File(
+                    [blob],
+                    `gunluk-rapor-${tarih}.png`,
+                    { type: "image/png" }
+                );
+
+                if (islem === "indir") {
+
+                    const url = URL.createObjectURL(blob);
+
+                    const link = document.createElement("a");
+                    link.href = url;
+                    link.download = dosya.name;
+                    link.click();
+
+                    URL.revokeObjectURL(url);
+
+                } else if (islem === "paylas") {
+
+                    if (navigator.canShare &&
+                        navigator.canShare({ files: [dosya] })) {
+
+                        await navigator.share({
+                            files: [dosya],
+                            title: "Günlük Çalışma Raporum",
+                            text: `${tarihMetni} çalışma raporum`
+                        });
+
+                    } else {
+                        alert("Cihazın görsel paylaşımını desteklemiyor. Rapor indirilecek.");
+
+                        const url = URL.createObjectURL(blob);
+                        const link = document.createElement("a");
+
+                        link.href = url;
+                        link.download = dosya.name;
+                        link.click();
+
+                        URL.revokeObjectURL(url);
+                    }
+                }
+
+            } catch (hata) {
+
+                console.error("Rapor oluşturma hatası:", hata);
+                alert("Rapor oluşturulurken bir hata meydana geldi.");
+
+            } finally {
+
+                rapor.remove();
+
+            }
+        }
+        // Geçmiş çalışmalarını ekranda göster.
+        function calismaGecmisiniGoster() {
+
+
+            const alan = document.getElementById("calisma-gecmisi");
+
+            let gecmis = calismaGecmisiniYukle();
+
+            // Ekranda göstermeden önce eski kayıtları da birleştir.
+            gecmis = calismaKayitlariniBirlestir(gecmis);
+
+            localStorage.setItem(
+                "yksCalismaGecmisi",
+                JSON.stringify(gecmis)
+            );
+
+
+            alan.innerHTML = "";
+
+            if (gecmis.length === 0) {
+
+                alan.textContent =
+                    "Henüz tamamlanmış bir çalışman bulunmuyor.";
+
+                return;
+
+            }
+
+            // Günleri en yeniden eskiye sırala.
+            const tarihler = [...new Set(
+                gecmis.map(kayit => kayit.tarih)
+            )].sort().reverse();
+
+            tarihler.forEach(tarih => {
+
+                const gunKayitlari = gecmis.filter(
+                    kayit => kayit.tarih === tarih
+                );
+
+                const gunAlani = document.createElement("div");
+                gunAlani.className = "gecmis-gun";
+                const raporButonlari = document.createElement("div");
+                raporButonlari.className = "rapor-butonlari";
+
+                const indirButonu = document.createElement("button");
+                indirButonu.textContent = "Raporu İndir";
+                indirButonu.className = "rapor-indir-buton";
+
+                const paylasButonu = document.createElement("button");
+                paylasButonu.textContent = "Paylaş";
+                paylasButonu.className = "rapor-paylas-buton";
+
+                raporButonlari.append(indirButonu, paylasButonu);
+                indirButonu.addEventListener("click", () => {
+                    gunlukRaporuOlustur(tarih, gunKayitlari, "indir");
+                });
+
+                paylasButonu.addEventListener("click", () => {
+                    gunlukRaporuOlustur(tarih, gunKayitlari, "paylas");
+                });
+
+                const tarihParcalari = tarih.split("-");
+
+                const tarihMetni = new Date(
+                    Number(tarihParcalari[0]),
+                    Number(tarihParcalari[1]) - 1,
+                    Number(tarihParcalari[2])
+                ).toLocaleDateString("tr-TR", {
+                    day: "numeric",
+                    month: "long",
+                    year: "numeric"
+                });
+
+                const baslik = document.createElement("h4");
+                baslik.textContent = tarihMetni;
+
+                gunAlani.appendChild(baslik);
+
+                let gunToplami = 0;
+
+                gunKayitlari.forEach(kayit => {
+
+                    gunToplami += kayit.sureMs;
+
+                    const kayitAlani = document.createElement("div");
+                    kayitAlani.className = "gecmis-kayit";
+
+                    const ders = document.createElement("strong");
+                    ders.textContent = kayit.ders;
+
+                    const konu = document.createElement("p");
+                    konu.textContent = "Konu: " + kayit.konu;
+
+                    const sure = document.createElement("p");
+                    sure.textContent =
+                        "Çalışma Süresi: " +
+                        gecmisSuresiniFormatla(kayit.sureMs);
+
+                    const saat = document.createElement("p");
+                    saat.textContent =
+                        "Saat: " +
+                        new Date(kayit.baslangic).toLocaleTimeString("tr-TR") +
+                        " - " +
+                        new Date(kayit.bitis).toLocaleTimeString("tr-TR");
+
+                    // Her çalışma için ayrı silme butonu oluştur.
+                    const silButonu = document.createElement("button");
+
+                    silButonu.textContent = "Bu Kaydı Sil";
+                    silButonu.className = "gecmis-sil-buton";
+
+                    silButonu.addEventListener("click", function () {
+
+                        calismaKaydiniSil(kayit);
+
+                    });
+
+                    kayitAlani.append(
+                        ders,
+                        konu,
+                        sure,
+                        saat,
+                        silButonu
+                    );
+
+                    gunAlani.appendChild(kayitAlani);
+
+
+                });
+
+                const toplam = document.createElement("p");
+                toplam.className = "gecmis-toplam";
+                toplam.textContent =
+                    "Günlük Toplam: " +
+                    gecmisSuresiniFormatla(gunToplami);
+
+                gunAlani.appendChild(toplam);
+                gunAlani.appendChild(raporButonlari);
+                alan.appendChild(gunAlani);
+
+            });
+
+        }
 
         // Daha önce kaydedilmiş aktif oturumu yükle.
         try {
@@ -1286,23 +1941,6 @@
         }
 
 
-        // Aktif oturumu tarayıcıya kaydet.
-        function calismaKaydet() {
-
-            if (aktifCalisma) {
-
-                localStorage.setItem(
-                    "yksAktifCalisma",
-                    JSON.stringify(aktifCalisma)
-                );
-
-            } else {
-
-                localStorage.removeItem("yksAktifCalisma");
-
-            }
-
-        }
 
 
         // Geçen süreyi hesapla.
@@ -1423,9 +2061,15 @@
 
             const panel = document.getElementById("calisma-panel");
 
+
             panel.classList.add("odak-acik");
 
+            // Paneli ve zamanlayıcıyı görünür konuma getir.
+            panel.scrollTop = 0;
+            panel.scrollIntoView({ block: "start" });
+
             calismaArayuzunuGuncelle();
+
 
         }
 
@@ -1458,15 +2102,24 @@
 
             }
 
+
             if (document.fullscreenElement !== panel) {
 
-                panel.requestFullscreen().catch(hata => {
+                panel.requestFullscreen().then(() => {
+
+                    panel.scrollTop = 0;
+
+                    document.getElementById("calisma-sayaci")
+                        .scrollIntoView({ block: "center" });
+
+                }).catch(hata => {
 
                     alert("Tam ekran açılırken bir sorun oluştu.");
 
                 });
 
             }
+
 
         }
 
@@ -1478,7 +2131,6 @@
             calismaArayuzunuGuncelle();
 
         });
-
         // Yeni çalışma başlat.
         function calismaBaslat() {
 
@@ -1488,9 +2140,18 @@
 
             const ders = document.getElementById("calisma-dersi").value;
 
+            const konu = document.getElementById("calisma-konusu").value.trim();
+
             const sure = Number(
                 document.getElementById("calisma-suresi").value
             );
+
+            if (!konu) {
+
+                alert("Lütfen çalışacağın konuyu gir.");
+                return;
+
+            }
 
             if (!Number.isInteger(sure) || sure < 1 || sure > 600) {
 
@@ -1501,11 +2162,22 @@
 
             aktifCalisma = {
 
+                oturumId: Date.now(),
+
                 tur: "calisma",
                 ders: ders,
+                konu: konu,
+
                 planlananSure: sure * 60 * 1000,
+
                 gecenSureMs: 0,
+
+                // Tamamlanmış çalışma aralıkları.
+                calismaAraliklari: [],
+
+                // Şu an devam eden çalışma aralığının başlangıcı.
                 baslangicZamani: Date.now(),
+
                 durum: "calisiyor"
 
             };
@@ -1515,13 +2187,15 @@
             calismaKaydet();
 
             document.getElementById("calisma-durum").textContent =
-                ders + " çalışması başladı.";
+                ders + " - " + konu + " çalışması başladı.";
 
             calismaArayuzunuGuncelle();
 
             calismaZamanlayicisiniBaslat();
 
         }
+
+
 
 
         // Çalışma tamamlandıktan sonra mola seç.
@@ -1631,6 +2305,17 @@
             const tur = aktifCalisma.tur || "calisma";
 
             aktifCalisma.gecenSureMs = calismaGecenSure();
+            // Duraklatılana kadar geçen çalışma aralığını kaydet.
+            if (!aktifCalisma.calismaAraliklari) {
+                aktifCalisma.calismaAraliklari = [];
+            }
+
+            aktifCalisma.calismaAraliklari.push({
+
+                baslangic: aktifCalisma.baslangicZamani,
+                bitis: Date.now()
+
+            });
 
             aktifCalisma.baslangicZamani = null;
 
@@ -1702,6 +2387,51 @@
             const tur = aktifCalisma.tur || "calisma";
 
             const ders = aktifCalisma.ders;
+            // Yalnızca çalışma oturumlarını geçmişe kaydet.
+            if (tur === "calisma") {
+
+                if (!aktifCalisma.calismaAraliklari) {
+                    aktifCalisma.calismaAraliklari = [];
+                }
+
+                // Çalışma hâlâ devam ediyorsa son aralığı da ekle.
+                if (aktifCalisma.durum === "calisiyor") {
+
+                    const baslangic = aktifCalisma.baslangicZamani;
+
+                    let bitis = Date.now();
+
+                    // Otomatik bitişte planlanan süreden fazlasını kaydetme.
+                    if (otomatik) {
+
+                        const kalanPlanliSure =
+                            aktifCalisma.planlananSure -
+                            aktifCalisma.gecenSureMs;
+
+                        bitis = Math.min(
+                            bitis,
+                            baslangic + kalanPlanliSure
+                        );
+
+                    }
+
+                    if (bitis > baslangic) {
+
+                        aktifCalisma.calismaAraliklari.push({
+
+                            baslangic: baslangic,
+                            bitis: bitis
+
+                        });
+
+                    }
+
+                }
+
+                // Tamamlanan oturumu günlere ayırarak kaydet.
+                calismaGecmisineEkle(aktifCalisma);
+
+            }
 
             const gecenDakika = Math.floor(gecenSure / 60000);
 
@@ -1817,6 +2547,12 @@
 
 
         // Sayfa açıldığında kayıtlı oturumu kontrol et.
+        // Eski kayıtların yeni kayıt yapısıyla uyumlu olmasını sağla.
+        if (aktifCalisma && !aktifCalisma.calismaAraliklari) {
+
+            aktifCalisma.calismaAraliklari = [];
+
+        }
         if (aktifCalisma) {
 
             const tur = aktifCalisma.tur || "calisma";
@@ -1826,12 +2562,10 @@
                 document.getElementById("calisma-dersi").value =
                     aktifCalisma.ders;
 
+                document.getElementById("calisma-konusu").value =
+                    aktifCalisma.konu || "";
+
                 document.getElementById("calisma-suresi").value =
-                    aktifCalisma.planlananSure / 60000;
-
-            } else {
-
-                document.getElementById("mola-suresi").value =
                     aktifCalisma.planlananSure / 60000;
 
             }
@@ -1891,7 +2625,8 @@
 
         }
 
-
+        // Sayfa açıldığında geçmiş çalışmaları göster.
+        calismaGecmisiniGoster();
 
     </script>
 
