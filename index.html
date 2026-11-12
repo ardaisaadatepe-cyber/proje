@@ -687,6 +687,277 @@
             }
 
         }
+
+        /* GÜNLÜK PAYLAŞIM RAPORU */
+
+        .gunluk-rapor-karti {
+            width: 720px;
+            min-height: 1280px;
+            box-sizing: border-box;
+            padding: 75px 42px 45px;
+            background:
+                radial-gradient(ellipse at top left,
+                    rgba(116, 58, 225, 0.25),
+                    transparent 35%),
+                radial-gradient(ellipse at bottom right,
+                    rgba(91, 45, 190, 0.22),
+                    transparent 30%),
+                #090a12;
+
+            color: #f8fafc;
+            font-family: Arial, Helvetica, sans-serif;
+
+            display: flex;
+            flex-direction: column;
+
+            position: fixed;
+            left: -10000px;
+            top: 0;
+
+            overflow: hidden;
+        }
+
+        /* ÜST ALAN */
+
+        .rapor-ust {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .rapor-logo {
+            display: flex;
+            align-items: center;
+            gap: 9px;
+            font-size: 31px;
+            letter-spacing: -1px;
+        }
+
+        .rapor-logo span {
+            color: #ffffff;
+            font-weight: 800;
+        }
+
+        .rapor-logo strong {
+            color: #a16aff;
+            font-weight: 800;
+        }
+
+        .rapor-tarih {
+            display: flex;
+            flex-direction: column;
+            text-align: right;
+            gap: 6px;
+            font-size: 17px;
+        }
+
+        .rapor-tarih strong {
+            color: #ffffff;
+        }
+
+        .rapor-tarih span {
+            color: #999bb8;
+            font-size: 15px;
+        }
+
+        /* ANA BAŞLIK */
+
+        .rapor-baslik {
+            color: #a78bfa;
+            font-size: 17px;
+            font-weight: bold;
+            letter-spacing: 3px;
+            margin-top: 55px;
+        }
+
+        /* TOPLAM SÜRE KARTI */
+
+        .rapor-toplam-kart {
+            margin-top: 25px;
+            padding: 48px 30px;
+            border: 1px solid #6240a5;
+            border-radius: 28px;
+
+            background: linear-gradient(135deg,
+                    #1c1732,
+                    #11121f 65%,
+                    #19132c);
+
+            text-align: center;
+        }
+
+        .rapor-ust-etiket {
+            color: #aaa5c7;
+            font-size: 20px;
+            letter-spacing: 1px;
+            font-weight: 600;
+        }
+
+        .rapor-toplam-sure {
+            display: block;
+            color: #ffffff;
+            font-size: 67px;
+            font-weight: 800;
+            letter-spacing: -2px;
+            margin-top: 24px;
+            white-space: nowrap;
+        }
+
+        .rapor-mor-cizgi {
+            width: 180px;
+            height: 7px;
+            border-radius: 10px;
+            background: linear-gradient(90deg,
+                    #7839e8,
+                    #b16cff);
+            margin: 28px auto 0;
+        }
+
+        /* DERS DAĞILIMI */
+
+        .rapor-dagilim-baslik {
+            margin-top: 65px;
+            margin-bottom: 25px;
+            display: flex;
+            align-items: center;
+            gap: 18px;
+        }
+
+        .rapor-dagilim-baslik span {
+            font-size: 27px;
+            font-weight: 700;
+            color: #f8fafc;
+            white-space: nowrap;
+        }
+
+        .rapor-dagilim-baslik::after {
+            content: "";
+            height: 2px;
+            flex: 1;
+            background: #343044;
+        }
+
+        /* DERS SATIRLARI */
+
+        .rapor-ders-listesi {
+            display: flex;
+            flex-direction: column;
+            gap: 17px;
+        }
+
+        .rapor-ders-satiri {
+            background: linear-gradient(110deg,
+                    #171724,
+                    #11121e);
+
+            border: 1px solid #29283b;
+            border-radius: 18px;
+            padding: 23px 24px;
+        }
+
+        .rapor-ders-ust {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .rapor-ders-adi {
+            display: flex;
+            align-items: center;
+            gap: 13px;
+            flex: 1;
+            min-width: 0;
+            color: #f1f1f8;
+            font-size: 20px;
+            font-weight: 600;
+        }
+
+        .rapor-ders-nokta {
+            width: 15px;
+            height: 15px;
+            min-width: 15px;
+            border-radius: 50%;
+        }
+
+        .rapor-ders-yuzde {
+            color: #aaa5c7;
+            font-size: 17px;
+            min-width: 45px;
+            text-align: right;
+        }
+
+        .rapor-ders-sure {
+            color: #ffffff;
+            font-size: 19px;
+            min-width: 110px;
+            text-align: right;
+            white-space: nowrap;
+        }
+
+        /* İLERLEME ÇUBUKLARI */
+
+        .rapor-cubuk {
+            width: 65%;
+            height: 10px;
+            background: #29283a;
+            border-radius: 20px;
+            overflow: hidden;
+            margin-top: 17px;
+            margin-left: 28px;
+        }
+
+        .rapor-cubuk-dolgu {
+            height: 100%;
+            border-radius: 20px;
+        }
+
+        /* ALT MESAJ */
+
+        .rapor-alt-kart {
+            display: flex;
+            align-items: center;
+            gap: 25px;
+
+            margin-top: auto;
+            padding: 30px 25px;
+
+            border: 1px solid #55338e;
+            border-radius: 24px;
+
+            background: linear-gradient(110deg,
+                    #211839,
+                    #121321);
+        }
+
+        .rapor-alt-cizgi {
+            width: 5px;
+            height: 75px;
+            border-radius: 10px;
+            background: #a16aff;
+        }
+
+        .rapor-alt-kart strong {
+            font-size: 19px;
+            color: #ffffff;
+        }
+
+        .rapor-alt-kart p {
+            color: #b58aff;
+            font-size: 17px;
+            line-height: 1.5;
+            margin-bottom: 0;
+        }
+
+        /* ALT İMZA */
+
+        .rapor-imza {
+            margin-top: 40px;
+            text-align: center;
+            color: #77758f;
+            font-size: 15px;
+            letter-spacing: 7px;
+        }
     </style>
 </head>
 
@@ -1606,21 +1877,98 @@
             calismaGecmisiniGoster();
 
         }
+
         async function gunlukRaporuOlustur(tarih, gunKayitlari, islem) {
 
             const rapor = document.createElement("div");
+            rapor.className = "gunluk-rapor-karti";
 
-            rapor.style.width = "600px";
-            rapor.style.padding = "30px";
-            rapor.style.background = "#171a2e";
-            rapor.style.color = "#ffffff";
-            rapor.style.fontFamily = "Arial, sans-serif";
-            rapor.style.position = "fixed";
-            rapor.style.left = "-10000px";
-            rapor.style.top = "0";
+            // 1. Dersleri yalnızca rapor için grupla
+            const dersGruplari = {};
 
-            let gunToplami = 0;
+            gunKayitlari.forEach(kayit => {
+                const ders = kayit.ders || "Diğer";
 
+                if (!dersGruplari[ders]) {
+                    dersGruplari[ders] = 0;
+                }
+
+                dersGruplari[ders] += Number(kayit.sureMs) || 0;
+            });
+
+            // 2. Günlük toplam süreyi hesapla
+            const gunToplami = Object.values(dersGruplari)
+                .reduce((toplam, sure) => toplam + sure, 0);
+
+            // 3. Ders renkleri
+            const renkler = [
+                "#9147f5",
+                "#3185f5",
+                "#31c77a",
+                "#f5a333",
+                "#e0529c",
+                "#14b8a6",
+                "#e05b5b"
+            ];
+
+            // HTML içine güvenli metin yerleştirme
+            const guvenliMetin = (metin) => {
+                return String(metin ?? "").replace(/[&<>"']/g, karakter => ({
+                    "&": "&amp;",
+                    "<": "&lt;",
+                    ">": "&gt;",
+                    '"': "&quot;",
+                    "'": "&#39;"
+                })[karakter]);
+            };
+
+            // 4. Dersleri süreye göre sırala ve rapor satırlarını oluştur
+            const dersSatirlari = Object.entries(dersGruplari)
+                .sort((a, b) => b[1] - a[1])
+                .map(([ders, sure], index) => {
+
+                    const yuzde = gunToplami > 0
+                        ? Math.round((sure / gunToplami) * 100)
+                        : 0;
+
+                    const renk = renkler[index % renkler.length];
+
+                    return `
+                <div class="rapor-ders-satiri">
+
+                    <div class="rapor-ders-ust">
+
+                        <div class="rapor-ders-adi">
+                            <span
+                                class="rapor-ders-nokta"
+                                style="background:${renk};">
+                            </span>
+
+                            <span>${guvenliMetin(ders)}</span>
+                        </div>
+
+                        <span class="rapor-ders-yuzde">
+                            %${yuzde}
+                        </span>
+
+                        <strong class="rapor-ders-sure">
+                            ${gecmisSuresiniFormatla(sure)}
+                        </strong>
+
+                    </div>
+
+                    <div class="rapor-cubuk">
+                        <div
+                            class="rapor-cubuk-dolgu"
+                            style="width:${yuzde}%; background:${renk};">
+                        </div>
+                    </div>
+
+                </div>
+            `;
+                }).join("");
+
+            // 5. Tarihi biçimlendir
             const tarihMetni = new Date(tarih + "T12:00:00")
                 .toLocaleDateString("tr-TR", {
                     day: "numeric",
@@ -1628,86 +1976,83 @@
                     year: "numeric"
                 });
 
-            let kayitlarHTML = "";
+            const gunAdi = new Date(tarih + "T12:00:00")
+                .toLocaleDateString("tr-TR", {
+                    weekday: "long"
+                });
 
-            gunKayitlari.forEach(kayit => {
+            // 6. Raporun HTML yapısı
+            rapor.innerHTML = `
 
-                gunToplami += kayit.sureMs;
+        <div class="rapor-ust">
 
-                const baslangic = new Date(kayit.baslangic)
-                    .toLocaleTimeString("tr-TR");
+            <div class="rapor-logo">
+                <span>YKS</span>
+                <strong>TRACKER</strong>
+            </div>
 
-                const bitis = new Date(kayit.bitis)
-                    .toLocaleTimeString("tr-TR");
+            <div class="rapor-tarih">
+                <strong>${tarihMetni}</strong>
+                <span>${gunAdi}</span>
+            </div>
 
-                kayitlarHTML += `
-            <div style="
-                background:#263449;
-                padding:15px;
-                margin-top:12px;
-                border-radius:8px;
-            ">
-                <h3 style="margin:0 0 8px;color:#a78bfa;">
-                    ${kayit.ders}
-                </h3>
+        </div>
 
-                <p style="margin:5px 0;">
-                    Konu: ${kayit.konu}
-                </p>
+        <div class="rapor-baslik">
+            GÜNLÜK ÇALIŞMA RAPORU
+        </div>
 
-                <p style="margin:5px 0;">
-                    Süre: ${gecmisSuresiniFormatla(kayit.sureMs)}
-                </p>
+        <div class="rapor-toplam-kart">
 
-                <p style="margin:5px 0;color:#94a3b8;">
-                    ${baslangic} - ${bitis}
+            <span class="rapor-ust-etiket">
+                TOPLAM ÇALIŞMA SÜRESİ
+            </span>
+
+            <strong class="rapor-toplam-sure">
+                ${gecmisSuresiniFormatla(gunToplami)}
+            </strong>
+
+            <div class="rapor-mor-cizgi"></div>
+
+        </div>
+
+        <div class="rapor-dagilim-baslik">
+            <span>DERS BAZLI DAĞILIM</span>
+        </div>
+
+        <div class="rapor-ders-listesi">
+            ${dersSatirlari}
+        </div>
+
+        <div class="rapor-alt-kart">
+
+            <div class="rapor-alt-cizgi"></div>
+
+            <div>
+                <strong>Bugünkü performansın harika!</strong>
+
+                <p>
+                    Devam et, hedeflerine çok yaklaşıyorsun.
                 </p>
             </div>
-        `;
-            });
 
-            rapor.innerHTML = `
-        <div style="text-align:center;">
-            <h1 style="color:#a78bfa;">Günlük Çalışma Raporu</h1>
-            <p style="color:#cbd5e1;">${tarihMetni}</p>
         </div>
 
-        <hr style="border:1px solid #343653;margin:20px 0;">
-
-        <h2>Çalışma Detayları</h2>
-
-        ${kayitlarHTML}
-
-        <div style="
-            margin-top:20px;
-            padding:18px;
-            background:#312e81;
-            border-radius:8px;
-            text-align:center;
-        ">
-            <h2 style="margin:0 0 8px;">Günlük Toplam</h2>
-            <h1 style="margin:0;color:#c4b5fd;">
-                ${gecmisSuresiniFormatla(gunToplami)}
-            </h1>
+        <div class="rapor-imza">
+            Y K S &nbsp; T R A C K E R
         </div>
 
-        <p style="
-            text-align:center;
-            color:#94a3b8;
-            margin-top:25px;
-            font-size:12px;
-        ">
-            YKS Çalışma Takip Sistemi
-        </p>
     `;
 
             document.body.appendChild(rapor);
 
             try {
 
+                // 7. Raporu PNG görseline dönüştür
                 const canvas = await html2canvas(rapor, {
                     scale: 2,
-                    backgroundColor: "#171a2e"
+                    backgroundColor: "#090a12",
+                    useCORS: true
                 });
 
                 const blob = await new Promise(resolve => {
@@ -1720,25 +2065,31 @@
 
                 const dosya = new File(
                     [blob],
-                    `gunluk-rapor-${tarih}.png`,
+                    `yks-rapor-${tarih}.png`,
                     { type: "image/png" }
                 );
 
+                // 8. İndirme işlemi
                 if (islem === "indir") {
 
                     const url = URL.createObjectURL(blob);
-
                     const link = document.createElement("a");
+
                     link.href = url;
                     link.download = dosya.name;
                     link.click();
 
-                    URL.revokeObjectURL(url);
+                    setTimeout(() => URL.revokeObjectURL(url), 1000);
+                }
 
-                } else if (islem === "paylas") {
+                // 9. Paylaşma işlemi
+                else if (islem === "paylas") {
 
-                    if (navigator.canShare &&
-                        navigator.canShare({ files: [dosya] })) {
+                    if (
+                        navigator.share &&
+                        navigator.canShare &&
+                        navigator.canShare({ files: [dosya] })
+                    ) {
 
                         await navigator.share({
                             files: [dosya],
@@ -1747,7 +2098,10 @@
                         });
 
                     } else {
-                        alert("Cihazın görsel paylaşımını desteklemiyor. Rapor indirilecek.");
+
+                        alert(
+                            "Bu cihaz doğrudan görsel paylaşımını desteklemiyor. Rapor indirilecek."
+                        );
 
                         const url = URL.createObjectURL(blob);
                         const link = document.createElement("a");
@@ -1756,14 +2110,16 @@
                         link.download = dosya.name;
                         link.click();
 
-                        URL.revokeObjectURL(url);
+                        setTimeout(() => URL.revokeObjectURL(url), 1000);
                     }
                 }
 
             } catch (hata) {
 
-                console.error("Rapor oluşturma hatası:", hata);
-                alert("Rapor oluşturulurken bir hata meydana geldi.");
+                if (hata.name !== "AbortError") {
+                    console.error("Rapor oluşturma hatası:", hata);
+                    alert("Rapor oluşturulurken bir hata meydana geldi.");
+                }
 
             } finally {
 
@@ -1771,6 +2127,7 @@
 
             }
         }
+
         // Geçmiş çalışmalarını ekranda göster.
         function calismaGecmisiniGoster() {
 
