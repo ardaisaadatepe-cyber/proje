@@ -409,6 +409,21 @@
             color: #85869b;
         }
 
+        #calisma-modu {
+            width: 100%;
+            padding: 12px;
+            background: #101827;
+            color: white;
+            border: 1px solid #475569;
+            border-radius: 8px;
+            font-size: 16px;
+        }
+
+        #calisma-modu:focus {
+            border-color: #a78bfa;
+            outline: none;
+        }
+
         /* GEÇMİŞ ÇALIŞMALAR */
 
         #calisma-gecmisi-alani {
@@ -611,6 +626,7 @@
         #calisma-panel.odak-acik #calisma-ayarlar,
         #calisma-panel.odak-acik #mola-ayarlar,
         #calisma-panel.odak-acik #calisma-sonraki-adim,
+        #calisma-panel.odak-acik #yapilacaklar-alani,
         #calisma-panel.odak-acik #calisma-gecmisi-alani {
             display: none !important;
         }
@@ -958,6 +974,178 @@
             font-size: 15px;
             letter-spacing: 7px;
         }
+
+        /* GEÇMİŞ ÇALIŞMALAR AÇ/KAPA */
+        .bolum-ac-kapa {
+            width: 100%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 12px 15px;
+            border: none;
+            border-radius: 10px;
+            background: transparent;
+            color: inherit;
+            font-size: 18px;
+            font-weight: 600;
+            cursor: pointer;
+            text-align: left;
+        }
+
+        #gecmis-ok {
+            font-size: 13px;
+            transition: transform 0.2s ease;
+        }
+
+        #gecmis-baslik[aria-expanded="true"] #gecmis-ok {
+            transform: rotate(180deg);
+        }
+
+        /* YAPILACAKLAR LİSTESİ */
+        .gorev-ekleme {
+            display: flex;
+            gap: 10px;
+            margin: 15px 0;
+        }
+
+        #gorev-metni {
+            flex: 1;
+            min-width: 0;
+            padding: 12px;
+            border: 1px solid #45445f;
+            border-radius: 8px;
+            background: #17172b;
+            color: #fff;
+            font-size: 14px;
+        }
+
+        #gorev-metni:focus {
+            outline: none;
+            border-color: #8b5cf6;
+        }
+
+        #gorev-ekle,
+        #gorevleri-temizle {
+            padding: 11px 15px;
+            border: none;
+            border-radius: 8px;
+            background: #7654d6;
+            color: #fff;
+            font-weight: 600;
+            cursor: pointer;
+            transition: 0.2s;
+        }
+
+        #gorev-ekle:hover,
+        #gorevleri-temizle:hover {
+            filter: brightness(1.15);
+        }
+
+        #gorev-ilerleme {
+            margin: 12px 0;
+            color: #aaa9bd;
+            font-size: 13px;
+        }
+
+        .gorev-satiri {
+            display: flex;
+            align-items: flex-start;
+            gap: 12px;
+            padding: 12px;
+            margin-bottom: 8px;
+            border: 1px solid #35344e;
+            border-radius: 8px;
+            background: #202039;
+        }
+
+        .gorev-checkbox {
+            width: 17px;
+            height: 17px;
+            accent-color: #8b5cf6;
+            cursor: pointer;
+            flex-shrink: 0;
+        }
+
+        .gorev-yazi {
+            flex: 1;
+            min-width: 0;
+            color: #eee;
+            white-space: normal;
+            overflow-wrap: break-word;
+            word-break: normal;
+            line-height: 1.5;
+            font-size: 14px;
+        }
+
+        .gorev-satiri.tamamlandi .gorev-yazi {
+            color: #9290a5;
+            text-decoration: line-through;
+        }
+
+        .gorev-sil {
+            border: none;
+            background: transparent;
+            color: #ff6b75;
+            font-size: 18px;
+            cursor: pointer;
+            padding: 3px 7px;
+        }
+
+        #gorevleri-temizle {
+            margin-top: 10px;
+            background: #963f50;
+        }
+
+        .gorev-bos {
+            padding: 15px;
+            color: #aaa9bd;
+            text-align: center;
+            font-size: 14px;
+        }
+
+        @media (max-width: 500px) {
+            .gorev-ekleme {
+                flex-direction: column;
+            }
+
+            #gorev-ekle {
+                width: 100%;
+            }
+        }
+
+        .gorev-satiri .gorev-checkbox {
+            width: 17px !important;
+            height: 17px !important;
+            min-width: 17px;
+            padding: 0 !important;
+            margin: 0;
+            flex: 0 0 17px;
+            accent-color: #8b5cf6;
+        }
+
+        #gorevleri-sonlandir {
+            width: 100%;
+            padding: 11px 15px;
+            margin-top: 10px;
+            border: none;
+            border-radius: 8px;
+            background: #059669;
+            color: white;
+            font-weight: 600;
+            cursor: pointer;
+        }
+
+        #gorevleri-sonlandir:hover {
+            background: #047857;
+        }
+
+        #gorevleri-temizle,
+        #gorevleri-sonlandir {
+            width: 100%;
+            min-height: 42px;
+            box-sizing: border-box;
+            display: block;
+        }
     </style>
 </head>
 
@@ -1289,6 +1477,12 @@
         <div id="calisma-ayarlar" class="calisma-alan">
 
             <h3>Yeni Çalışma</h3>
+            <label for="calisma-modu">Zamanlayıcı Modu:</label>
+
+            <select id="calisma-modu" onchange="calismaModunuDegistir()">
+                <option value="hedef">Hedef Süreli</option>
+                <option value="serbest">Serbest Süre</option>
+            </select>
 
             <label for="calisma-dersi">Çalışacağın Ders:</label>
 
@@ -1306,9 +1500,13 @@
             </select>
             <label for="calisma-konusu">Çalışacağın Konu:</label>
             <input type="text" id="calisma-konusu" placeholder="Örn: Fonksiyonlar" maxlength="100">
-            <label for="calisma-suresi">Çalışma Süresi (Dakika):</label>
+            <div id="hedef-sure-alani">
 
-            <input type="number" id="calisma-suresi" min="1" max="600" value="45">
+                <label for="calisma-suresi">Çalışma Süresi (Dakika):</label>
+
+                <input type="number" id="calisma-suresi" min="1" max="600" value="45">
+
+            </div>
 
             <div class="calisma-butonlar">
                 <button type="button" id="calisma-baslat" onclick="calismaBaslat()">
@@ -1403,17 +1601,69 @@
 
         </div>
         <!-- GEÇMİŞ ÇALIŞMALAR -->
-
+        <!-- GEÇMİŞ ÇALIŞMALAR -->
         <div id="calisma-gecmisi-alani" class="calisma-alan">
 
-            <h3>Geçmiş Çalışmalarım</h3>
+            <button type="button" id="gecmis-baslik" class="bolum-ac-kapa" aria-expanded="false"
+                aria-controls="calisma-gecmisi-icerik">
+                <span>Geçmiş Çalışmalarım</span>
+                <span id="gecmis-ok">▼</span>
+            </button>
 
-            <div id="calisma-gecmisi">
-                <p>Henüz tamamlanmış bir çalışman bulunmuyor.</p>
+            <div id="calisma-gecmisi-icerik" hidden>
+                <div id="calisma-gecmisi">
+                    <p>Henüz tamamlanmış bir çalışman bulunmuyor.</p>
+                </div>
             </div>
 
         </div>
+        <!-- YAPILACAKLAR LİSTESİ -->
+        <div id="yapilacaklar-alani" class="calisma-alan">
+
+            <h3>Yapılacaklar Listem</h3>
+
+            <div class="gorev-ekleme">
+                <input type="text" id="gorev-metni" maxlength="150" placeholder="Örn: Matematik 40 soru çöz">
+
+                <button type="button" id="gorev-ekle">
+                    Görev Ekle
+                </button>
+            </div>
+
+            <p id="gorev-ilerleme">0 görev tamamlandı / 0 görev</p>
+
+            <div id="gorev-listesi"></div>
+
+            <button type="button" id="gorevleri-sonlandir">
+                Görevleri Sonlandır
+            </button>
+            <button type="button" id="gorevleri-temizle">
+                Tüm Görevleri Temizle
+            </button>
+
+        </div>
     </section>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -1652,6 +1902,17 @@
 
 
         // ÇALIŞMA TAKİP SİSTEMİ
+
+        // Hedef süreli ve serbest süre modları arasında geçiş yap.
+        function calismaModunuDegistir() {
+
+            const mod = document.getElementById("calisma-modu").value;
+
+            const hedefSureAlani = document.getElementById("hedef-sure-alani");
+
+            hedefSureAlani.hidden = mod === "serbest";
+
+        }
 
         let aktifCalisma = null;
         let calismaAraligi = null;
@@ -2489,6 +2750,7 @@
 
         });
         // Yeni çalışma başlat.
+        // Yeni çalışma başlat.
         function calismaBaslat() {
 
             if (aktifCalisma || panelDurumu !== "calisma-hazir") {
@@ -2499,10 +2761,11 @@
 
             const konu = document.getElementById("calisma-konusu").value.trim();
 
-            const sure = Number(
-                document.getElementById("calisma-suresi").value
-            );
+            const zamanlayiciTuru = document.getElementById("calisma-modu").value;
 
+            let sure = null;
+
+            // Konu kontrolü
             if (!konu) {
 
                 alert("Lütfen çalışacağın konuyu gir.");
@@ -2510,10 +2773,19 @@
 
             }
 
-            if (!Number.isInteger(sure) || sure < 1 || sure > 600) {
+            // Yalnızca hedef süreli modda süre kontrolü yap.
+            if (zamanlayiciTuru === "hedef") {
 
-                alert("Lütfen 1 ile 600 dakika arasında geçerli bir süre gir.");
-                return;
+                sure = Number(
+                    document.getElementById("calisma-suresi").value
+                );
+
+                if (!Number.isInteger(sure) || sure < 1 || sure > 600) {
+
+                    alert("Lütfen 1 ile 600 dakika arasında geçerli bir süre gir.");
+                    return;
+
+                }
 
             }
 
@@ -2522,17 +2794,21 @@
                 oturumId: Date.now(),
 
                 tur: "calisma",
+
+                zamanlayiciTuru: zamanlayiciTuru,
+
                 ders: ders,
                 konu: konu,
 
-                planlananSure: sure * 60 * 1000,
+                // Serbest modda hedef süre bulunmaz.
+                planlananSure: zamanlayiciTuru === "hedef"
+                    ? sure * 60 * 1000
+                    : null,
 
                 gecenSureMs: 0,
 
-                // Tamamlanmış çalışma aralıkları.
                 calismaAraliklari: [],
 
-                // Şu an devam eden çalışma aralığının başlangıcı.
                 baslangicZamani: Date.now(),
 
                 durum: "calisiyor"
@@ -2543,15 +2819,23 @@
 
             calismaKaydet();
 
-            document.getElementById("calisma-durum").textContent =
-                ders + " - " + konu + " çalışması başladı.";
+            if (zamanlayiciTuru === "serbest") {
+
+                document.getElementById("calisma-durum").textContent =
+                    ders + " - " + konu + " serbest çalışma başladı.";
+
+            } else {
+
+                document.getElementById("calisma-durum").textContent =
+                    ders + " - " + konu + " çalışması başladı.";
+
+            }
 
             calismaArayuzunuGuncelle();
 
             calismaZamanlayicisiniBaslat();
 
         }
-
 
 
 
@@ -2733,6 +3017,16 @@
                 return;
             }
 
+            const tur = aktifCalisma.tur || "calisma";
+
+            const zamanlayiciTuru =
+                aktifCalisma.zamanlayiciTuru || "hedef";
+
+            // Serbest süre otomatik olarak bitirilemez.
+            if (zamanlayiciTuru === "serbest") {
+                otomatik = false;
+            }
+
             let gecenSure = calismaGecenSure();
 
             if (otomatik) {
@@ -2741,9 +3035,8 @@
 
             }
 
-            const tur = aktifCalisma.tur || "calisma";
-
             const ders = aktifCalisma.ders;
+
             // Yalnızca çalışma oturumlarını geçmişe kaydet.
             if (tur === "calisma") {
 
@@ -2821,7 +3114,6 @@
             document.getElementById("calisma-sayaci").textContent =
                 calismaZamaniniFormatla(gecenSure);
 
-
             if (tur === "mola") {
 
                 if (otomatik) {
@@ -2879,6 +3171,7 @@
 
 
         // Her saniye kalan süreyi güncelle.
+        // Her saniye sayacı güncelle.
         function calismaDurumunuGuncelle() {
 
             if (!aktifCalisma || aktifCalisma.durum !== "calisiyor") {
@@ -2887,6 +3180,19 @@
 
             const gecenSure = calismaGecenSure();
 
+            const zamanlayiciTuru = aktifCalisma.zamanlayiciTuru || "hedef";
+
+            // Serbest süre: İleri doğru say.
+            if (zamanlayiciTuru === "serbest") {
+
+                document.getElementById("calisma-sayaci").textContent =
+                    calismaZamaniniFormatla(gecenSure);
+
+                return;
+
+            }
+
+            // Hedef süreli: Geri doğru say.
             const kalanSure =
                 aktifCalisma.planlananSure - gecenSure;
 
@@ -2914,6 +3220,11 @@
 
             const tur = aktifCalisma.tur || "calisma";
 
+            // Eski kayıtlar için varsayılan mod hedef süreli olsun.
+            if (tur === "calisma" && !aktifCalisma.zamanlayiciTuru) {
+                aktifCalisma.zamanlayiciTuru = "hedef";
+            }
+
             if (tur === "calisma") {
 
                 document.getElementById("calisma-dersi").value =
@@ -2922,8 +3233,17 @@
                 document.getElementById("calisma-konusu").value =
                     aktifCalisma.konu || "";
 
-                document.getElementById("calisma-suresi").value =
-                    aktifCalisma.planlananSure / 60000;
+                document.getElementById("calisma-modu").value =
+                    aktifCalisma.zamanlayiciTuru;
+
+                if (aktifCalisma.zamanlayiciTuru === "hedef") {
+
+                    document.getElementById("calisma-suresi").value =
+                        aktifCalisma.planlananSure / 60000;
+
+                }
+
+                calismaModunuDegistir();
 
             }
 
@@ -2935,6 +3255,12 @@
 
                     document.getElementById("calisma-durum").textContent =
                         "Molan kaldığı yerden devam ediyor.";
+
+                } else if (aktifCalisma.zamanlayiciTuru === "serbest") {
+
+                    document.getElementById("calisma-durum").textContent =
+                        aktifCalisma.ders +
+                        " serbest çalışması kaldığı yerden devam ediyor.";
 
                 } else {
 
@@ -2953,6 +3279,11 @@
                     document.getElementById("calisma-durum").textContent =
                         "Molan duraklatılmış durumda.";
 
+                } else if (aktifCalisma.zamanlayiciTuru === "serbest") {
+
+                    document.getElementById("calisma-durum").textContent =
+                        "Serbest çalışma duraklatılmış durumda.";
+
                 } else {
 
                     document.getElementById("calisma-durum").textContent =
@@ -2960,17 +3291,29 @@
 
                 }
 
-                const kalanSure =
-                    aktifCalisma.planlananSure - calismaGecenSure();
+                if (
+                    tur === "calisma" &&
+                    aktifCalisma.zamanlayiciTuru === "serbest"
+                ) {
 
-                if (kalanSure <= 0) {
-
-                    calismaBitir(true);
+                    document.getElementById("calisma-sayaci").textContent =
+                        calismaZamaniniFormatla(calismaGecenSure());
 
                 } else {
 
-                    document.getElementById("calisma-sayaci").textContent =
-                        calismaZamaniniFormatla(kalanSure);
+                    const kalanSure =
+                        aktifCalisma.planlananSure - calismaGecenSure();
+
+                    if (kalanSure <= 0) {
+
+                        calismaBitir(true);
+
+                    } else {
+
+                        document.getElementById("calisma-sayaci").textContent =
+                            calismaZamaniniFormatla(kalanSure);
+
+                    }
 
                 }
 
@@ -2978,12 +3321,203 @@
 
         } else {
 
+            calismaModunuDegistir();
+
             calismaArayuzunuGuncelle();
 
         }
-
         // Sayfa açıldığında geçmiş çalışmaları göster.
         calismaGecmisiniGoster();
+        // ==========================================
+        // YAPILACAKLAR LİSTESİ
+        // ==========================================
+
+        let yksGorevleri = [];
+
+        // Görevleri localStorage üzerinden yükle
+        function gorevleriYukle() {
+            try {
+                const kayitliGorevler = localStorage.getItem("yksYapilacaklar");
+
+                if (kayitliGorevler) {
+                    const veriler = JSON.parse(kayitliGorevler);
+
+                    if (Array.isArray(veriler)) {
+                        yksGorevleri = veriler;
+                    }
+                }
+            } catch (hata) {
+                console.error("Görevler yüklenirken hata oluştu:", hata);
+                yksGorevleri = [];
+            }
+
+            gorevleriGoster();
+        }
+
+        // Görevleri localStorage'a kaydet
+        function gorevleriKaydet() {
+            localStorage.setItem(
+                "yksYapilacaklar",
+                JSON.stringify(yksGorevleri)
+            );
+        }
+
+        // Görevleri ekranda göster
+        function gorevleriGoster() {
+            const liste = document.getElementById("gorev-listesi");
+            const ilerleme = document.getElementById("gorev-ilerleme");
+
+            liste.innerHTML = "";
+
+            const tamamlanan = yksGorevleri.filter(gorev => gorev.tamamlandi).length;
+
+            ilerleme.textContent =
+                `${tamamlanan} görev tamamlandı / ${yksGorevleri.length} görev`;
+
+            if (yksGorevleri.length === 0) {
+                const bosMesaj = document.createElement("p");
+                bosMesaj.className = "gorev-bos";
+                bosMesaj.textContent = "Henüz bir görevin bulunmuyor.";
+                liste.appendChild(bosMesaj);
+                return;
+            }
+
+            yksGorevleri.forEach(gorev => {
+                const satir = document.createElement("div");
+                satir.className = "gorev-satiri";
+
+                if (gorev.tamamlandi) {
+                    satir.classList.add("tamamlandi");
+                }
+
+                const checkbox = document.createElement("input");
+                checkbox.type = "checkbox";
+                checkbox.className = "gorev-checkbox";
+                checkbox.checked = gorev.tamamlandi;
+
+                checkbox.addEventListener("change", function () {
+                    gorev.tamamlandi = checkbox.checked;
+
+                    gorevleriKaydet();
+                    gorevleriGoster();
+                });
+
+                const yazi = document.createElement("span");
+                yazi.className = "gorev-yazi";
+                yazi.textContent = gorev.metin;
+
+                const silButonu = document.createElement("button");
+                silButonu.type = "button";
+                silButonu.className = "gorev-sil";
+                silButonu.textContent = "✕";
+                silButonu.setAttribute("aria-label", "Görevi sil");
+
+                silButonu.addEventListener("click", function () {
+                    yksGorevleri = yksGorevleri.filter(
+                        item => item.id !== gorev.id
+                    );
+
+                    gorevleriKaydet();
+                    gorevleriGoster();
+                });
+
+                satir.appendChild(checkbox);
+                satir.appendChild(yazi);
+                satir.appendChild(silButonu);
+
+                liste.appendChild(satir);
+            });
+        }
+
+        // Yeni görev ekle
+        function gorevEkle() {
+            const input = document.getElementById("gorev-metni");
+            const metin = input.value.trim();
+
+            if (metin === "") {
+                alert("Lütfen bir görev yaz.");
+                input.focus();
+                return;
+            }
+
+            const yeniGorev = {
+                id: Date.now(),
+                metin: metin,
+                tamamlandi: false
+            };
+
+            yksGorevleri.push(yeniGorev);
+
+            gorevleriKaydet();
+            gorevleriGoster();
+
+            input.value = "";
+            input.focus();
+        }
+
+        // Görev ekleme butonu
+        document.getElementById("gorev-ekle").addEventListener("click", gorevEkle);
+
+        // Enter tuşuyla görev ekleme
+        document.getElementById("gorev-metni").addEventListener("keydown", function (event) {
+            if (event.key === "Enter") {
+                gorevEkle();
+            }
+        });
+
+        // Bütün görevleri temizle
+        document.getElementById("gorevleri-temizle").addEventListener("click", function () {
+            if (yksGorevleri.length === 0) {
+                alert("Silinecek görev bulunmuyor.");
+                return;
+            }
+
+            const onay = confirm("Bütün görevlerini silmek istediğine emin misin?");
+
+            if (onay) {
+                yksGorevleri = [];
+
+                gorevleriKaydet();
+                gorevleriGoster();
+            }
+        });
+
+        // Geçmiş çalışmaları açıp kapat
+        document.getElementById("gecmis-baslik").addEventListener("click", function () {
+            const icerik = document.getElementById("calisma-gecmisi-icerik");
+            const acikMi = this.getAttribute("aria-expanded") === "true";
+
+            this.setAttribute("aria-expanded", String(!acikMi));
+            icerik.hidden = acikMi;
+        });
+
+        // Sayfa açıldığında görevleri yükle
+        gorevleriYukle();
+        // Tamamlanan görevleri sonlandır
+        document.getElementById("gorevleri-sonlandir").addEventListener("click", function () {
+
+            const tamamlananSayisi = yksGorevleri.filter(
+                gorev => gorev.tamamlandi
+            ).length;
+
+            if (tamamlananSayisi === 0) {
+                alert("Sonlandırılacak tamamlanmış görev bulunmuyor.");
+                return;
+            }
+
+            const onay = confirm(
+                `${tamamlananSayisi} tamamlanmış görev silinecek. Onaylıyor musun?`
+            );
+
+            if (onay) {
+                yksGorevleri = yksGorevleri.filter(
+                    gorev => !gorev.tamamlandi
+                );
+
+                gorevleriKaydet();
+                gorevleriGoster();
+            }
+        });
 
     </script>
 
